@@ -1,0 +1,908 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "RestSource",
+            "requestMethod": "GET",
+            "paginationRules": {
+              "supportRFC5988": "true"
+            },
+            "httpRequestTimeout": "00:01:40",
+            "requestInterval": "00.00:00:00.010",
+            "datasetSettings": {
+              "type": "RestResource",
+              "typeProperties": {
+                "relativeUrl": {
+                  "value": "@concat('/youtube/v3/videos?part=',pipeline().parameters.pVideoListPart,'&chart=',pipeline().parameters.pVideoListChart,'&maxResults',pipeline().parameters.pVideoListMaxResults,'&regionCode=',pipeline().parameters.pVideoListRegionCode,'&key=',pipeline().parameters.API_key)",
+                  "type": "Expression"
+                }
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "282ac209-1b03-44e5-b9a4-ab865be63356"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "JsonSink",
+            "formatSettings": {
+              "type": "JsonWriteSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseWriteSettings"
+            },
+            "datasetSettings": {
+              "type": "Json",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "raw/youtube/videos",
+                  "fileName": {
+                    "value": "@concat('videos-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
+                    "type": "Expression"
+                  }
+                },
+                "encodingName": "UTF-8"
+              },
+              "schema": {},
+              "linkedService": {
+                "name": "Lakehouse",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "403c9777-8146-be1d-4906-c84d09659cea",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get videos JSON",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "JsonSource",
+            "formatSettings": {
+              "type": "JsonReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "Json",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "raw/youtube/videos",
+                  "fileName": {
+                    "value": "@concat('videos-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
+                    "type": "Expression"
+                  }
+                },
+                "encodingName": "UTF-8"
+              },
+              "schema": {},
+              "linkedService": {
+                "name": "Lakehouse",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "403c9777-8146-be1d-4906-c84d09659cea",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "tableOption": "autoCreate",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "datasetSettings": {
+              "type": "DataWarehouseTable",
+              "typeProperties": {
+                "schema": "bronze",
+                "table": "youtube_videos"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Warehouse",
+                "properties": {
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "artifactId": "db9babcf-bfc6-4a84-963e-bec2c7ab93f1",
+                    "endpoint": "wnzujvs3fmievaydw5e3c6leo4-4o54cqjadooe5cx3terj7gessa.datawarehouse.fabric.microsoft.com",
+                    "workspaceId": "41c1bbe3-1b20-4e9c-8afb-99229f989290"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            },
+            "columnFlattenSettings": {
+              "treatArrayAsString": false,
+              "treatStructAsString": false,
+              "flattenColumnDelimiter": "."
+            }
+          },
+          "enableStaging": true
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get videos Delta Table",
+        "dependsOn": [
+          {
+            "activity": "Get videos JSON",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": "SELECT DISTINCT\n\t[items.snippet.channelId]\nFROM [Warehouse].[bronze].[youtube_videos]",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "linkedService": {
+              "name": "Warehouse",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "db9babcf-bfc6-4a84-963e-bec2c7ab93f1",
+                  "endpoint": "wnzujvs3fmievaydw5e3c6leo4-4o54cqjadooe5cx3terj7gessa.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "41c1bbe3-1b20-4e9c-8afb-99229f989290"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Lookup channels_id",
+        "dependsOn": [
+          {
+            "activity": "Get videos Delta Table",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Lookup channels_id').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "RestSource",
+                  "requestMethod": "GET",
+                  "paginationRules": {
+                    "supportRFC5988": "true"
+                  },
+                  "httpRequestTimeout": "00:01:40",
+                  "requestInterval": "00.00:00:00.010",
+                  "datasetSettings": {
+                    "type": "RestResource",
+                    "typeProperties": {
+                      "relativeUrl": {
+                        "value": "@concat('/youtube/v3/channels?part=',pipeline().parameters.pChannelsPart,'&id=',item(),'&key=',pipeline().parameters.API_key)",
+                        "type": "Expression"
+                      }
+                    },
+                    "schema": [],
+                    "externalReferences": {
+                      "connection": "1f97e00a-5f2a-40f3-94a4-c1a01151d355"
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "JsonSink",
+                  "formatSettings": {
+                    "type": "JsonWriteSettings"
+                  },
+                  "storeSettings": {
+                    "type": "LakehouseWriteSettings"
+                  },
+                  "datasetSettings": {
+                    "type": "Json",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": {
+                          "value": "@concat('raw/youtube/comments/channel_id-',item())",
+                          "type": "Expression"
+                        },
+                        "fileName": {
+                          "value": "@concat('channel-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
+                          "type": "Expression"
+                        }
+                      }
+                    },
+                    "schema": {},
+                    "linkedService": {
+                      "name": "Lakehouse",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "403c9777-8146-be1d-4906-c84d09659cea",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Get channels JSON",
+              "dependsOn": []
+            },
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "JsonSource",
+                  "formatSettings": {
+                    "type": "JsonReadSettings"
+                  },
+                  "storeSettings": {
+                    "type": "LakehouseReadSettings",
+                    "recursive": true,
+                    "enablePartitionDiscovery": false
+                  },
+                  "datasetSettings": {
+                    "type": "Json",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": {
+                          "value": "@concat('raw/youtube/comments/channel_id-',item())",
+                          "type": "Expression"
+                        },
+                        "fileName": {
+                          "value": "@concat('channel-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
+                          "type": "Expression"
+                        }
+                      }
+                    },
+                    "schema": {},
+                    "linkedService": {
+                      "name": "Lakehouse",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "403c9777-8146-be1d-4906-c84d09659cea",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "DataWarehouseSink",
+                  "tableOption": "autoCreate",
+                  "allowCopyCommand": true,
+                  "copyCommandSettings": {},
+                  "datasetSettings": {
+                    "type": "DataWarehouseTable",
+                    "typeProperties": {
+                      "schema": "bronze",
+                      "table": "youtube_channels"
+                    },
+                    "schema": [],
+                    "linkedService": {
+                      "name": "Warehouse",
+                      "properties": {
+                        "type": "DataWarehouse",
+                        "typeProperties": {
+                          "artifactId": "db9babcf-bfc6-4a84-963e-bec2c7ab93f1",
+                          "endpoint": "wnzujvs3fmievaydw5e3c6leo4-4o54cqjadooe5cx3terj7gessa.datawarehouse.fabric.microsoft.com",
+                          "workspaceId": "41c1bbe3-1b20-4e9c-8afb-99229f989290"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  },
+                  "columnFlattenSettings": {
+                    "treatArrayAsString": false,
+                    "treatStructAsString": false,
+                    "flattenColumnDelimiter": "."
+                  }
+                },
+                "enableStaging": true
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Get channels Delta Table",
+              "dependsOn": [
+                {
+                  "activity": "Get channels JSON",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "name": "ForEach channel_id",
+        "dependsOn": [
+          {
+            "activity": "Lookup channels_id",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "DataWarehouseSource",
+            "sqlReaderQuery": "SELECT DISTINCT\n\t[items.id]\nFROM [Warehouse].[bronze].[youtube_videos]",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "datasetSettings": {
+            "type": "DataWarehouseTable",
+            "schema": [],
+            "linkedService": {
+              "name": "Warehouse",
+              "properties": {
+                "type": "DataWarehouse",
+                "typeProperties": {
+                  "artifactId": "db9babcf-bfc6-4a84-963e-bec2c7ab93f1",
+                  "endpoint": "wnzujvs3fmievaydw5e3c6leo4-4o54cqjadooe5cx3terj7gessa.datawarehouse.fabric.microsoft.com",
+                  "workspaceId": "41c1bbe3-1b20-4e9c-8afb-99229f989290"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Lookup videos_id",
+        "dependsOn": [
+          {
+            "activity": "Get videos Delta Table",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Lookup videos_id').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "RestSource",
+                  "requestMethod": "GET",
+                  "paginationRules": {
+                    "supportRFC5988": "true"
+                  },
+                  "httpRequestTimeout": "00:01:40",
+                  "requestInterval": "00.00:00:00.010",
+                  "datasetSettings": {
+                    "type": "RestResource",
+                    "typeProperties": {
+                      "relativeUrl": {
+                        "value": "@concat('/youtube/v3/commentThreads?part=',pipeline().parameters.pCommentsPart,'&maxResults=',pipeline().parameters.pCommentsMaxResults,'&videoId=',item(),'&key=',pipeline().parameters.API_key)",
+                        "type": "Expression"
+                      }
+                    },
+                    "schema": [],
+                    "externalReferences": {
+                      "connection": "1f97e00a-5f2a-40f3-94a4-c1a01151d355"
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "DelimitedTextSink",
+                  "formatSettings": {
+                    "type": "DelimitedTextWriteSettings",
+                    "quoteAllText": true,
+                    "fileExtension": ".txt"
+                  },
+                  "storeSettings": {
+                    "type": "LakehouseWriteSettings"
+                  },
+                  "datasetSettings": {
+                    "type": "DelimitedText",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": {
+                          "value": "@concat('raw/youtube/comments/video_id-',item())",
+                          "type": "Expression"
+                        },
+                        "fileName": {
+                          "value": "@concat('comments-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
+                          "type": "Expression"
+                        }
+                      },
+                      "columnDelimiter": ",",
+                      "quoteChar": "\"",
+                      "escapeChar": "\\",
+                      "firstRowAsHeader": true
+                    },
+                    "schema": [],
+                    "linkedService": {
+                      "name": "Lakehouse",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "403c9777-8146-be1d-4906-c84d09659cea",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  },
+                  "columnFlattenSettings": {
+                    "treatArrayAsString": false,
+                    "treatStructAsString": false,
+                    "flattenColumnDelimiter": "."
+                  }
+                },
+                "enableStaging": false
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Get comments JSON",
+              "dependsOn": []
+            },
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "JsonSource",
+                  "formatSettings": {
+                    "type": "JsonReadSettings"
+                  },
+                  "storeSettings": {
+                    "type": "LakehouseReadSettings",
+                    "recursive": true,
+                    "enablePartitionDiscovery": false
+                  },
+                  "datasetSettings": {
+                    "type": "Json",
+                    "typeProperties": {
+                      "location": {
+                        "type": "LakehouseLocation",
+                        "folderPath": {
+                          "value": "@concat('raw/youtube/comments/video_id-',item())",
+                          "type": "Expression"
+                        },
+                        "fileName": {
+                          "value": "@concat('comments-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
+                          "type": "Expression"
+                        }
+                      }
+                    },
+                    "schema": {},
+                    "linkedService": {
+                      "name": "Lakehouse",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "403c9777-8146-be1d-4906-c84d09659cea",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Files"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "DataWarehouseSink",
+                  "tableOption": "autoCreate",
+                  "allowCopyCommand": true,
+                  "copyCommandSettings": {},
+                  "datasetSettings": {
+                    "type": "DataWarehouseTable",
+                    "typeProperties": {
+                      "schema": "bronze",
+                      "table": "youtube_comments"
+                    },
+                    "schema": [],
+                    "linkedService": {
+                      "name": "Warehouse",
+                      "properties": {
+                        "type": "DataWarehouse",
+                        "typeProperties": {
+                          "artifactId": "db9babcf-bfc6-4a84-963e-bec2c7ab93f1",
+                          "endpoint": "wnzujvs3fmievaydw5e3c6leo4-4o54cqjadooe5cx3terj7gessa.datawarehouse.fabric.microsoft.com",
+                          "workspaceId": "41c1bbe3-1b20-4e9c-8afb-99229f989290"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  },
+                  "columnFlattenSettings": {
+                    "treatArrayAsString": false,
+                    "treatStructAsString": false,
+                    "flattenColumnDelimiter": "."
+                  }
+                },
+                "enableStaging": true
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Get comments Delta Table",
+              "dependsOn": [
+                {
+                  "activity": "Get comments JSON",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "name": "ForEach video_id",
+        "dependsOn": [
+          {
+            "activity": "Lookup videos_id",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "RestSource",
+            "requestMethod": "GET",
+            "paginationRules": {
+              "supportRFC5988": "true"
+            },
+            "httpRequestTimeout": "00:01:40",
+            "requestInterval": "00.00:00:00.010",
+            "datasetSettings": {
+              "type": "RestResource",
+              "typeProperties": {
+                "relativeUrl": {
+                  "value": "@concat('/youtube/v3/videoCategories?part=',pipeline().parameters.pCategoriesPart,'&regionCode=',pipeline().parameters.pVideoListRegionCode,'&key=',pipeline().parameters.API_key)",
+                  "type": "Expression"
+                }
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "282ac209-1b03-44e5-b9a4-ab865be63356"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "JsonSink",
+            "formatSettings": {
+              "type": "JsonWriteSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseWriteSettings"
+            },
+            "datasetSettings": {
+              "type": "Json",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "raw/youtube/categories",
+                  "fileName": {
+                    "value": "@concat('categories-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
+                    "type": "Expression"
+                  }
+                }
+              },
+              "schema": {},
+              "linkedService": {
+                "name": "Lakehouse",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "403c9777-8146-be1d-4906-c84d09659cea",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get categories JSON",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "JsonSource",
+            "formatSettings": {
+              "type": "JsonReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "Json",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "raw/youtube/categories",
+                  "fileName": {
+                    "value": "@concat('categories-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
+                    "type": "Expression"
+                  }
+                },
+                "encodingName": "UTF-8"
+              },
+              "schema": {},
+              "linkedService": {
+                "name": "Lakehouse",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "403c9777-8146-be1d-4906-c84d09659cea",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "tableOption": "autoCreate",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "datasetSettings": {
+              "type": "DataWarehouseTable",
+              "typeProperties": {
+                "schema": "bronze",
+                "table": "youtube_categories"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "Warehouse",
+                "properties": {
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "artifactId": "db9babcf-bfc6-4a84-963e-bec2c7ab93f1",
+                    "endpoint": "wnzujvs3fmievaydw5e3c6leo4-4o54cqjadooe5cx3terj7gessa.datawarehouse.fabric.microsoft.com",
+                    "workspaceId": "41c1bbe3-1b20-4e9c-8afb-99229f989290"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            },
+            "columnFlattenSettings": {
+              "treatArrayAsString": false,
+              "treatStructAsString": false,
+              "flattenColumnDelimiter": "."
+            }
+          },
+          "enableStaging": true
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Get categoriesDelta Table",
+        "dependsOn": [
+          {
+            "activity": "Get categories JSON",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "API_key": {
+        "type": "string",
+        "defaultValue": "AIzaSyDmAULHlDdg3HNIGeE-k45IMxLj1XoH5CA"
+      },
+      "pVideoListRegionCode": {
+        "type": "string",
+        "defaultValue": "BR"
+      },
+      "pVideoListPart": {
+        "type": "string",
+        "defaultValue": "snippet,contentDetails,statistics"
+      },
+      "pVideoListChart": {
+        "type": "string",
+        "defaultValue": "mostPopular"
+      },
+      "pVideoListMaxResults": {
+        "type": "string",
+        "defaultValue": "50"
+      },
+      "pChannelsPart": {
+        "type": "string",
+        "defaultValue": "snippet,contentDetails,statistics,brandingSettings,contentOwnerDetails,id,localizations,statistics,topicDetails"
+      },
+      "pChannelsMaxResults": {
+        "type": "string",
+        "defaultValue": "100"
+      },
+      "pCategoriesPart": {
+        "type": "String",
+        "defaultValue": "snippet"
+      },
+      "pCommentsPart": {
+        "type": "string",
+        "defaultValue": "id,replies,snippet"
+      },
+      "pCommentsMaxResults": {
+        "type": "string",
+        "defaultValue": "100"
+      }
+    }
+  }
+}

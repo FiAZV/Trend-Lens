@@ -1,0 +1,948 @@
+{
+  "name": "{{Dataset_Name}}",
+  "compatibilityLevel": 1604,
+  "model": {
+    "name": "{{Dataset_Name}}",
+    "culture": "en-US",
+    "collation": "Latin1_General_100_BIN2_UTF8",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "youtube_categories",
+        "sourceLineageTag": "[bronze].[youtube_categories]",
+        "columns": [
+          {
+            "name": "kind",
+            "dataType": "string",
+            "sourceColumn": "kind",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "kind",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "etag",
+            "dataType": "string",
+            "sourceColumn": "etag",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "etag",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.kind",
+            "dataType": "string",
+            "sourceColumn": "items.kind",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.kind",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.etag",
+            "dataType": "string",
+            "sourceColumn": "items.etag",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.etag",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.id",
+            "dataType": "string",
+            "sourceColumn": "items.id",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.title",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.assignable",
+            "dataType": "boolean",
+            "sourceColumn": "items.snippet.assignable",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit",
+            "sourceLineageTag": "items.snippet.assignable",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.channelId",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.channelId",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.channelId",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "youtube_categories",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "bronze"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "youtube_channels",
+        "sourceLineageTag": "[bronze].[youtube_channels]",
+        "columns": [
+          {
+            "name": "kind",
+            "dataType": "string",
+            "sourceColumn": "kind",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "kind",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "etag",
+            "dataType": "string",
+            "sourceColumn": "etag",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "etag",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "pageInfo.totalResults",
+            "dataType": "int64",
+            "sourceColumn": "pageInfo.totalResults",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "pageInfo.totalResults",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "pageInfo.resultsPerPage",
+            "dataType": "int64",
+            "sourceColumn": "pageInfo.resultsPerPage",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "pageInfo.resultsPerPage",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "youtube_channels",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "bronze"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "youtube_videos",
+        "sourceLineageTag": "[bronze].[youtube_videos]",
+        "columns": [
+          {
+            "name": "kind",
+            "dataType": "string",
+            "sourceColumn": "kind",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "kind",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "etag",
+            "dataType": "string",
+            "sourceColumn": "etag",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "etag",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.kind",
+            "dataType": "string",
+            "sourceColumn": "items.kind",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.kind",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.etag",
+            "dataType": "string",
+            "sourceColumn": "items.etag",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.etag",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.id",
+            "dataType": "string",
+            "sourceColumn": "items.id",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.publishedAt",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.publishedAt",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.publishedAt",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.channelId",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.channelId",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.channelId",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.title",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.description",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.description",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.description",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.default.url",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.thumbnails.default.url",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.thumbnails.default.url",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.default.width",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.default.width",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.default.width",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.default.height",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.default.height",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.default.height",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.medium.url",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.thumbnails.medium.url",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.thumbnails.medium.url",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.medium.width",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.medium.width",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.medium.width",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.medium.height",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.medium.height",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.medium.height",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.high.url",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.thumbnails.high.url",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.thumbnails.high.url",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.high.width",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.high.width",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.high.width",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.high.height",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.high.height",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.high.height",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.standard.url",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.thumbnails.standard.url",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.thumbnails.standard.url",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.standard.width",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.standard.width",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.standard.width",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.standard.height",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.standard.height",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.standard.height",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.maxres.url",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.thumbnails.maxres.url",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.thumbnails.maxres.url",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.maxres.width",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.maxres.width",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.maxres.width",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.thumbnails.maxres.height",
+            "dataType": "int64",
+            "sourceColumn": "items.snippet.thumbnails.maxres.height",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "items.snippet.thumbnails.maxres.height",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.channelTitle",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.channelTitle",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.channelTitle",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.categoryId",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.categoryId",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.categoryId",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.liveBroadcastContent",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.liveBroadcastContent",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.liveBroadcastContent",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.localized.title",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.localized.title",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.localized.title",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.localized.description",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.localized.description",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.localized.description",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.contentDetails.duration",
+            "dataType": "string",
+            "sourceColumn": "items.contentDetails.duration",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.contentDetails.duration",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.contentDetails.dimension",
+            "dataType": "string",
+            "sourceColumn": "items.contentDetails.dimension",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.contentDetails.dimension",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.contentDetails.definition",
+            "dataType": "string",
+            "sourceColumn": "items.contentDetails.definition",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.contentDetails.definition",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.contentDetails.caption",
+            "dataType": "string",
+            "sourceColumn": "items.contentDetails.caption",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.contentDetails.caption",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.contentDetails.licensedContent",
+            "dataType": "boolean",
+            "sourceColumn": "items.contentDetails.licensedContent",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit",
+            "sourceLineageTag": "items.contentDetails.licensedContent",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.contentDetails.regionRestriction.blocked",
+            "dataType": "string",
+            "sourceColumn": "items.contentDetails.regionRestriction.blocked",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.contentDetails.regionRestriction.blocked",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.contentDetails.projection",
+            "dataType": "string",
+            "sourceColumn": "items.contentDetails.projection",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.contentDetails.projection",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.statistics.viewCount",
+            "dataType": "string",
+            "sourceColumn": "items.statistics.viewCount",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.statistics.viewCount",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.statistics.likeCount",
+            "dataType": "string",
+            "sourceColumn": "items.statistics.likeCount",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.statistics.likeCount",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.statistics.favoriteCount",
+            "dataType": "string",
+            "sourceColumn": "items.statistics.favoriteCount",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.statistics.favoriteCount",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.statistics.commentCount",
+            "dataType": "string",
+            "sourceColumn": "items.statistics.commentCount",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.statistics.commentCount",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "nextPageToken",
+            "dataType": "string",
+            "sourceColumn": "nextPageToken",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "nextPageToken",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "pageInfo.totalResults",
+            "dataType": "int64",
+            "sourceColumn": "pageInfo.totalResults",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "pageInfo.totalResults",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "pageInfo.resultsPerPage",
+            "dataType": "int64",
+            "sourceColumn": "pageInfo.resultsPerPage",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "pageInfo.resultsPerPage",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.tags",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.tags",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.tags",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.defaultLanguage",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.defaultLanguage",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.defaultLanguage",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.snippet.defaultAudioLanguage",
+            "dataType": "string",
+            "sourceColumn": "items.snippet.defaultAudioLanguage",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.snippet.defaultAudioLanguage",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "items.contentDetails.regionRestriction.allowed",
+            "dataType": "string",
+            "sourceColumn": "items.contentDetails.regionRestriction.allowed",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "items.contentDetails.regionRestriction.allowed",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "youtube_videos",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "bronze"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "name": "DatabaseQuery",
+        "kind": "m",
+        "expression": "let\n    database = {{TDS_Endpoint}}\nin\n    database\n"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "SourceLineageTagType",
+        "value": "DatabaseFullyQualifiedName"
+      }
+    ]
+  }
+}

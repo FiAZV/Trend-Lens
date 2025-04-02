@@ -270,7 +270,7 @@
                       "location": {
                         "type": "LakehouseLocation",
                         "folderPath": {
-                          "value": "@concat('raw/youtube/comments/channel_id-',item())",
+                          "value": "@concat('raw/youtube/channels/channel_id-',item())",
                           "type": "Expression"
                         },
                         "fileName": {
@@ -326,7 +326,7 @@
                       "location": {
                         "type": "LakehouseLocation",
                         "folderPath": {
-                          "value": "@concat('raw/youtube/comments/channel_id-',item())",
+                          "value": "@concat('raw/youtube/channels/channel_id-',item())",
                           "type": "Expression"
                         },
                         "fileName": {
@@ -490,7 +490,7 @@
                     "type": "RestResource",
                     "typeProperties": {
                       "relativeUrl": {
-                        "value": "@concat('/youtube/v3/commentThreads?part=',pipeline().parameters.pCommentsPart,'&maxResults=',pipeline().parameters.pCommentsMaxResults,'&videoId=',item(),'&key=',pipeline().parameters.API_key)",
+                        "value": "@concat('/youtube/v3/commentThreads?part=',pipeline().parameters.pCommentsPart,'&maxResults=',pipeline().parameters.pCommentsMaxResults,'&videoId=',item()['items.id'],'&key=',pipeline().parameters.API_key)",
                         "type": "Expression"
                       }
                     },
@@ -502,35 +502,29 @@
                   }
                 },
                 "sink": {
-                  "type": "DelimitedTextSink",
+                  "type": "JsonSink",
                   "formatSettings": {
-                    "type": "DelimitedTextWriteSettings",
-                    "quoteAllText": true,
-                    "fileExtension": ".txt"
+                    "type": "JsonWriteSettings"
                   },
                   "storeSettings": {
                     "type": "LakehouseWriteSettings"
                   },
                   "datasetSettings": {
-                    "type": "DelimitedText",
+                    "type": "Json",
                     "typeProperties": {
                       "location": {
                         "type": "LakehouseLocation",
                         "folderPath": {
-                          "value": "@concat('raw/youtube/comments/video_id-',item())",
+                          "value": "@concat('raw/youtube/comments/video_id-',item()['items.id'])",
                           "type": "Expression"
                         },
                         "fileName": {
                           "value": "@concat('comments-',formatDateTime(pipeline().TriggerTime,'yyyy'),'-',formatDateTime(pipeline().TriggerTime,'MM'),'-',formatDateTime(pipeline().TriggerTime,'dd'),'.json')",
                           "type": "Expression"
                         }
-                      },
-                      "columnDelimiter": ",",
-                      "quoteChar": "\"",
-                      "escapeChar": "\\",
-                      "firstRowAsHeader": true
+                      }
                     },
-                    "schema": [],
+                    "schema": {},
                     "linkedService": {
                       "name": "Lakehouse",
                       "properties": {
@@ -544,19 +538,6 @@
                       }
                     },
                     "annotations": []
-                  }
-                },
-                "translator": {
-                  "type": "TabularTranslator",
-                  "typeConversion": true,
-                  "typeConversionSettings": {
-                    "allowDataTruncation": true,
-                    "treatBooleanAsNumber": false
-                  },
-                  "columnFlattenSettings": {
-                    "treatArrayAsString": false,
-                    "treatStructAsString": false,
-                    "flattenColumnDelimiter": "."
                   }
                 },
                 "enableStaging": false
@@ -590,7 +571,7 @@
                       "location": {
                         "type": "LakehouseLocation",
                         "folderPath": {
-                          "value": "@concat('raw/youtube/comments/video_id-',item())",
+                          "value": "@concat('raw/youtube/comments/video_id-',item()['items.id'])",
                           "type": "Expression"
                         },
                         "fileName": {
@@ -673,6 +654,22 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "SetVariable",
+              "typeProperties": {
+                "variableName": "a",
+                "value": {
+                  "value": "@item()['items.id']",
+                  "type": "Expression"
+                }
+              },
+              "policy": {
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Set variable1",
+              "dependsOn": []
             }
           ]
         },
@@ -902,6 +899,12 @@
       "pCommentsMaxResults": {
         "type": "string",
         "defaultValue": "100"
+      }
+    },
+    "variables": {
+      "a": {
+        "type": "String",
+        "defaultValue": "a"
       }
     }
   }

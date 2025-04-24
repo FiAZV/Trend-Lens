@@ -9,4 +9,3 @@ CREATE TABLE [bronze].[youtube_categories] (
 	[items.snippet.assignable] bit NULL, 
 	[items.snippet.channelId] varchar(8000) NULL
 );
-

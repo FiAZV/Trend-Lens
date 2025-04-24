@@ -5,4 +5,3 @@ CREATE TABLE [bronze].[youtube_channels] (
 	[pageInfo.totalResults] bigint NULL, 
 	[pageInfo.resultsPerPage] bigint NULL
 );
-

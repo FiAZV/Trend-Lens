@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Notebook",
-    "displayName": "Youtube Bronze Layer",
+    "displayName": "Transform Reddit Json to Table Lakehouse",
     "description": "New notebook"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "d212917b-ec25-b5d6-4c73-25a727578b66"
+    "logicalId": "6252f0a1-6a6c-abaf-4ebc-aa516fd36a9d"
   }
 }

@@ -1,4 +1,4 @@
-CREATE TABLE [bronze].[youtube_videos] (
+CREATE TABLE [silver].[dedup_videos] (
 
 	[kind] varchar(8000) NULL, 
 	[etag] varchar(8000) NULL, 
@@ -46,5 +46,6 @@ CREATE TABLE [bronze].[youtube_videos] (
 	[items.snippet.tags] varchar(8000) NULL, 
 	[items.snippet.defaultLanguage] varchar(8000) NULL, 
 	[items.snippet.defaultAudioLanguage] varchar(8000) NULL, 
-	[items.contentDetails.regionRestriction.allowed] varchar(8000) NULL
+	[items.contentDetails.regionRestriction.allowed] varchar(8000) NULL, 
+	[rn] bigint NULL
 );

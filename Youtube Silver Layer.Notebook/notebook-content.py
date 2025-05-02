@@ -99,45 +99,6 @@ def transform_videos():
 
 # CELL ********************
 
-# def transform_thumbnails():
-#     # Ler tabela de vídeos da camada Bronze
-#     videos_df = spark.table(f"{bronze_schema}.youtube2_videos")
-    
-#     # Extrair e estruturar dados de thumbnails
-#     thumbnails_silver = videos_df.select(
-#         col("id").alias("video_id"),
-#         col("snippet.thumbnails.default.url")    .alias("thumbnail_default_url"),
-#         col("snippet.thumbnails.default.width")  .alias("thumbnail_default_width"),
-#         col("snippet.thumbnails.default.height") .alias("thumbnail_default_height"),
-#         col("snippet.thumbnails.medium.url")     .alias("thumbnail_medium_url"),
-#         col("snippet.thumbnails.medium.width")   .alias("thumbnail_medium_width"),
-#         col("snippet.thumbnails.medium.height")  .alias("thumbnail_medium_height"),
-#         col("snippet.thumbnails.high.url")       .alias("thumbnail_high_url"),
-#         col("snippet.thumbnails.high.width")     .alias("thumbnail_high_width"),
-#         col("snippet.thumbnails.high.height")    .alias("thumbnail_high_height"),
-#         col("snippet.thumbnails.standard.url")   .alias("thumbnail_standard_url"),
-#         col("snippet.thumbnails.standard.width") .alias("thumbnail_standard_width"),
-#         col("snippet.thumbnails.standard.height").alias("thumbnail_standard_height"),
-#         col("snippet.thumbnails.maxres.url")     .alias("thumbnail_maxres_url"), 
-#         col("snippet.thumbnails.maxres.width")   .alias("thumbnail_maxres_width"), 
-#         col("snippet.thumbnails.maxres.height")  .alias("thumbnail_maxres_height"), 
-#         col("extracted_at")
-#     ).dropDuplicates(["video_id"])  # Garantir uma entrada única por vídeo
-
-#     # Escrever tabela Silver
-#     thumbnails_silver.write.format("delta") \
-#         .mode("overwrite") \
-#         .saveAsTable(f"{silver_schema}.youtube2_thumbnails")
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
 from pyspark.sql.functions import from_json, col
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, MapType
 

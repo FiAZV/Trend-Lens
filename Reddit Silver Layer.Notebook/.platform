@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Notebook",
-    "displayName": "Reddit Bronze Layer",
+    "displayName": "Reddit Silver Layer",
     "description": "New notebook"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "6252f0a1-6a6c-abaf-4ebc-aa516fd36a9d"
+    "logicalId": "4a1e07ab-50f3-921a-4f92-55e43d5d4980"
   }
 }

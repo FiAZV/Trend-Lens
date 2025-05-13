@@ -1,12 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Notebook",
-    "displayName": "Youtube Bronze Layer",
-    "description": "New notebook"
+    "type": "DataPipeline",
+    "displayName": "Youtube Data Pipeline"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "d212917b-ec25-b5d6-4c73-25a727578b66"
+    "logicalId": "00ae2cce-6c97-a411-4863-2393af2bbb93"
   }
 }

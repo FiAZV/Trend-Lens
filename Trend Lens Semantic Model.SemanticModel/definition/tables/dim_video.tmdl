@@ -1,0 +1,106 @@
+table dim_video
+	lineageTag: 3e618415-86f3-40ad-aa5e-76991e61e927
+	sourceLineageTag: [gold].[dim_video]
+
+	column video_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2e7d9c08-045d-436f-9055-6bb519d0b8a4
+		sourceLineageTag: video_id
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column title
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 04776e51-526b-4f0a-b6b9-56f4fb28ed25
+		sourceLineageTag: title
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b8a6d1df-0d69-48bd-a0fc-9dbcc072f7d6
+		sourceLineageTag: duration
+		summarizeBy: none
+		sourceColumn: duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bbd24e9a-54aa-4d32-8714-68003cd15d9c
+		sourceLineageTag: category_id
+		summarizeBy: sum
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a32bb306-3cda-4a1f-b4ca-2cad9fa14b9a
+		sourceLineageTag: channel_id
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 540a90f2-f4bf-4f5e-9725-579426349e16
+		sourceLineageTag: published_at
+		summarizeBy: none
+		sourceColumn: published_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column definition
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8e575e65-2829-4fea-8253-6918a4a5d6ab
+		sourceLineageTag: definition
+		summarizeBy: none
+		sourceColumn: definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column caption
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5fc5a471-7a56-4854-ba07-202a16dab946
+		sourceLineageTag: caption
+		summarizeBy: none
+		sourceColumn: caption
+
+		annotation SummarizationSetBy = Automatic
+
+	column licensedContent
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 880c2114-0b07-46fa-ab9a-48cd48785dba
+		sourceLineageTag: licensedContent
+		summarizeBy: sum
+		sourceColumn: licensedContent
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_video = entity
+		mode: directLake
+		source
+			entityName: dim_video
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

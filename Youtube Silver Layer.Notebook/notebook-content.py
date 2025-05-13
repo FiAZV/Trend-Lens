@@ -62,7 +62,7 @@ silver_schema = f"{lakehouse_name}.silver"
 
 
 def transform_videos():
-    videos_df = spark.table(f"{bronze_schema}.youtube2_videos")
+    videos_df = spark.table(f"{bronze_schema}.youtube_videos")
     
     # Flatten nested fields + seleção de colunas
     videos_silver = videos_df.select(
@@ -88,7 +88,7 @@ def transform_videos():
     # Escrever tabela Silver
     videos_silver.write.format("delta") \
         .mode("overwrite") \
-        .saveAsTable(f"{silver_schema}.youtube2_videos")
+        .saveAsTable(f"{silver_schema}.youtube_videos")
 
 # METADATA ********************
 
@@ -104,7 +104,7 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 
 def transform_thumbnails():
     # Ler tabela de vídeos da Bronze
-    videos_df = spark.table(f"{bronze_schema}.youtube2_videos")
+    videos_df = spark.table(f"{bronze_schema}.youtube_videos")
     
     # 1. Definir schema do JSON de thumbnails
     thumbnail_schema = StructType([
@@ -165,7 +165,7 @@ def transform_thumbnails():
     # 4. Escrever tabela Silver
     thumbnails_silver.write.format("delta") \
         .mode("overwrite") \
-        .saveAsTable(f"{silver_schema}.youtube2_thumbnails")
+        .saveAsTable(f"{silver_schema}.youtube_thumbnails")
 
 # METADATA ********************
 
@@ -177,7 +177,7 @@ def transform_thumbnails():
 # CELL ********************
 
 def transform_tags():
-    videos_df = spark.table(f"{bronze_schema}.youtube2_videos")
+    videos_df = spark.table(f"{bronze_schema}.youtube_videos")
     
     # Flatten nested fields + seleção de colunas
     videos_silver = videos_df.select(
@@ -188,7 +188,7 @@ def transform_tags():
     # Escrever tabela Silver
     videos_silver.write.format("delta") \
         .mode("overwrite") \
-        .saveAsTable(f"{silver_schema}.youtube2_tags")
+        .saveAsTable(f"{silver_schema}.youtube_tags")
 
 # METADATA ********************
 
@@ -200,7 +200,7 @@ def transform_tags():
 # CELL ********************
 
 def transform_languages():
-    videos_df = spark.table(f"{bronze_schema}.youtube2_videos")
+    videos_df = spark.table(f"{bronze_schema}.youtube_videos")
     
     # Flatten nested fields + seleção de colunas
     videos_silver = videos_df.select(
@@ -212,7 +212,7 @@ def transform_languages():
     # Escrever tabela Silver
     videos_silver.write.format("delta") \
         .mode("overwrite") \
-        .saveAsTable(f"{silver_schema}.youtube2_languages")
+        .saveAsTable(f"{silver_schema}.youtube_languages")
 
 # METADATA ********************
 
@@ -225,7 +225,7 @@ def transform_languages():
 
 
 def transform_categories():
-    categories_df = spark.table(f"{bronze_schema}.youtube2_categories")
+    categories_df = spark.table(f"{bronze_schema}.youtube_categories")
     
     categories_silver = categories_df.select(
         col("id").cast(IntegerType()).alias("category_id"),
@@ -234,7 +234,7 @@ def transform_categories():
     
     categories_silver.write.format("delta") \
         .mode("overwrite") \
-        .saveAsTable(f"{silver_schema}.youtube2_categories")
+        .saveAsTable(f"{silver_schema}.youtube_categories")
 
 
 # METADATA ********************
@@ -250,7 +250,7 @@ from pyspark.sql.functions import from_json, col, trim, coalesce, lit, to_timest
 from pyspark.sql.types import StructType, StructField, StringType, TimestampType
 
 def transform_comments():
-    comments_df = spark.table(f"{bronze_schema}.youtube2_comments")
+    comments_df = spark.table(f"{bronze_schema}.youtube_comments")
     
     # Definir schema do JSON contido em 'snippet.topLevelComment'
     top_level_comment_schema = StructType([
@@ -280,7 +280,7 @@ def transform_comments():
     
     comments_silver.write.format("delta") \
         .mode("overwrite") \
-        .saveAsTable(f"{silver_schema}.youtube2_comments")
+        .saveAsTable(f"{silver_schema}.youtube_comments")
 
 # METADATA ********************
 
@@ -293,7 +293,7 @@ def transform_comments():
 
 
 def transform_channels():
-    channels_df = spark.table(f"{bronze_schema}.youtube2_channels")
+    channels_df = spark.table(f"{bronze_schema}.youtube_channels")
     
     channels_silver = channels_df.select(
         col("id").alias("channel_id"),
@@ -305,7 +305,7 @@ def transform_channels():
     
     channels_silver.write.format("delta") \
         .mode("overwrite") \
-        .saveAsTable(f"{silver_schema}.youtube2_channels")
+        .saveAsTable(f"{silver_schema}.youtube_channels")
 
 
 # METADATA ********************

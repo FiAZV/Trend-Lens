@@ -1,0 +1,16 @@
+relationship b9006fd2-bfc3-6f12-b64f-73333f1be57f
+	fromColumn: fact_video_performance.category_id
+	toColumn: dim_category.category_id
+
+relationship 755f4b58-05e6-cc42-8765-197055917ea7
+	fromColumn: fact_video_performance.channel_id
+	toColumn: dim_channel.channel_id
+
+relationship b3b22d51-da51-787a-d202-52e78dd17e13
+	fromColumn: dim_video.video_id
+	toColumn: fact_video_performance.video_id
+
+relationship 998163cb-82df-fbca-dd35-00bd540696b3
+	fromColumn: fact_comment_analysis.video_id
+	toColumn: dim_video.video_id
+

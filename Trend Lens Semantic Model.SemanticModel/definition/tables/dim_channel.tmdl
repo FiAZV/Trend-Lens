@@ -1,0 +1,55 @@
+table dim_channel
+	lineageTag: ed3e2c3e-0047-4391-aa26-9155c840916f
+	sourceLineageTag: [gold].[dim_channel]
+
+	column channel_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f7c28ac6-bb7b-42ba-9d7b-232cf065e7df
+		sourceLineageTag: channel_id
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_title
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1828ed89-8173-4d29-ad36-647c1497a697
+		sourceLineageTag: channel_title
+		summarizeBy: none
+		sourceColumn: channel_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column subscribers
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a45291e0-b695-4cfc-9b81-f6c38f51ce52
+		sourceLineageTag: subscribers
+		summarizeBy: none
+		sourceColumn: subscribers
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_videos
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2a0b55c8-9375-49e4-a450-69fe751eb107
+		sourceLineageTag: total_videos
+		summarizeBy: none
+		sourceColumn: total_videos
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_channel = entity
+		mode: directLake
+		source
+			entityName: dim_channel
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

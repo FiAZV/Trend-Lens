@@ -1,12 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Notebook",
-    "displayName": "Get Youtube API Data Alternative",
-    "description": "New notebook"
+    "type": "Report",
+    "displayName": "Trend Lens Report"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "d212917b-ec25-b5d6-4c73-25a727578b66"
+    "logicalId": "b1b878f4-3f50-8ee7-4455-b24836e9623a"
   }
 }

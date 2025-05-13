@@ -1,0 +1,86 @@
+table fact_comment_analysis
+	lineageTag: 631549b2-d117-4770-aa3d-c016fdec4603
+	sourceLineageTag: [gold].[fact_comment_analysis]
+
+	column comment_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1374b2b7-0437-4244-9509-3bfba2ac5abb
+		sourceLineageTag: comment_id
+		summarizeBy: none
+		sourceColumn: comment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column video_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9d9f466b-f9d2-442d-9f72-9318cafea9a5
+		sourceLineageTag: video_id
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column author
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0f5a9679-44bf-42c8-893d-1debe8b40cdd
+		sourceLineageTag: author
+		summarizeBy: none
+		sourceColumn: author
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_text
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5c02aebd-db35-49d5-9aba-212a02d3993e
+		sourceLineageTag: comment_text
+		summarizeBy: none
+		sourceColumn: comment_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_length
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 31f051ba-d104-476f-8266-59b0a6b641c8
+		sourceLineageTag: comment_length
+		summarizeBy: sum
+		sourceColumn: comment_length
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_after_video_publish
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d3281ff7-02fa-497a-a334-05e65c613390
+		sourceLineageTag: days_after_video_publish
+		summarizeBy: sum
+		sourceColumn: days_after_video_publish
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2b409178-9f8b-4c38-80fe-6513326fc973
+		sourceLineageTag: comment_date
+		summarizeBy: none
+		sourceColumn: comment_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_comment_analysis = entity
+		mode: directLake
+		source
+			entityName: fact_comment_analysis
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

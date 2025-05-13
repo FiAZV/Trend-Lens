@@ -1,12 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Notebook",
-    "displayName": "Get Youtube API Data Alternative",
-    "description": "New notebook"
+    "type": "SemanticModel",
+    "displayName": "Trend Lens Semantic Model"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "d212917b-ec25-b5d6-4c73-25a727578b66"
+    "logicalId": "425fe65e-fc94-ad5d-47d3-e15cec62522e"
   }
 }

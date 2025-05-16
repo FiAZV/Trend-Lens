@@ -27,7 +27,7 @@ from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.functions import current_timestamp, lit, col
 from pyspark.sql.types import (
     StructType, StructField, StringType, BooleanType,
-    LongType, TimestampType, IntegerType, MapType
+    LongType, TimestampType, IntegerType, MapType, ArrayType
 )
 from functools import reduce
 from typing import List
@@ -59,7 +59,8 @@ spark = SparkSession.builder.appName("YouTubeDataExtraction").getOrCreate()
 # CELL ********************
 
 # 1. Configurações da API do YouTube
-API_KEY = "AIzaSyDmAULHlDdg3HNIGeE-k45IMxLj1XoH5CA"
+# API_KEY = "AIzaSyDmAULHlDdg3HNIGeE-k45IMxLj1XoH5CA"
+API_KEY = "AIzaSyC0O_tDb6CKobRAWv2VBKk_TsVNZ1ZnY_U"
 BASE_URL = "https://www.googleapis.com/"
 REGION_CODE = "BR"
 
@@ -116,12 +117,14 @@ VIDEOS_SCHEMA = StructType([
         ]), True),
 
         StructField("channelTitle", StringType(), True),
+        StructField("tags", ArrayType(StringType()), True),
         StructField("categoryId", StringType(), True),
         StructField("liveBroadcastContent", StringType(), True),
         StructField("localized", StructType([
             StructField("title", StringType(), True),
             StructField("description", StringType(), True),
-        ]), True)
+        ]), True),
+        StructField("defaultAudioLanguage", StringType(), True)
     ]), True),
 
     StructField("contentDetails", StructType([
@@ -524,7 +527,7 @@ def extract_video_comments(video_ids):
     endpoint = 'youtube/v3/commentThreads'
     base_params = {
         'part': 'snippet',
-        'maxResults': 100,
+        'maxResults': 15,
         'order': 'relevance'
     }
 

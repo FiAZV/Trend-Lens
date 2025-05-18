@@ -171,7 +171,7 @@ def transform_videos(df):
         F.coalesce(F.col("contentDetails.dimension").cast(StringType()), F.lit("N/A"))                                                    .alias("dimension"),
         F.coalesce(F.col("contentDetails.definition").cast(StringType()), F.lit("N/A"))                                                   .alias("definition"),
         F.coalesce(F.col("contentDetails.caption").cast(BooleanType()), F.lit(None))                                                      .alias("caption"),
-        F.coalesce(F.col("contentDetails.licensedContent").cast(BooleanType()), F.lit(None))                                              .alias("licensedContent"),
+        F.coalesce(F.col("contentDetails.licensedContent").cast(BooleanType()), F.lit(None))                                              .alias("licensed_content"),
         F.coalesce(F.col("contentDetails.projection").cast(StringType()), F.lit("N/A"))                                                   .alias("projection"),
         F.coalesce(F.col("data_source").cast(StringType()), F.lit("N/A"))                                                                 .alias("data_source"),
         F.coalesce(F.col("extracted_at").cast(TimestampType()), F.to_timestamp(F.lit("1900-01-01 00:00:00")))                             .alias("extracted_at"),
@@ -225,16 +225,23 @@ def transform_thumbnails(df):
 # CELL ********************
 
 def transform_tags(df):
-    
-    transformed_df = df.select(
+    exploded_df = df.select(
+        F.col("id"),
+        F.explode_outer("snippet.tags").alias("tag"),
+        F.col("data_source"),
+        F.col("extracted_at")
+    )
+
+    transformed_df = exploded_df.select(
         F.col("id")                                                                                          .alias("video_id"),
-        F.col("snippet.tags")                                                                                .alias("tag"),
+        F.col("tag").cast(StringType())                                                                      .alias("tag"),
         F.coalesce(F.col("data_source").cast(StringType()), F.lit("N/A"))                                    .alias("data_source"),
         F.coalesce(F.col("extracted_at").cast(TimestampType()), F.to_timestamp(F.lit("1900-01-01 00:00:00"))).alias("extracted_at"),
         F.current_timestamp().cast(TimestampType())                                                          .alias("ingestion_timestamp")
     ).dropDuplicates()
-    
+
     return transformed_df
+
 
 # METADATA ********************
 

@@ -1,0 +1,288 @@
+table dim_video
+	lineageTag: 1869f81c-c70b-4a95-bff6-550d4b97d961
+	sourceLineageTag: [gold].[dim_video]
+
+	column video_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 00a7e0dd-68e8-4a17-b294-365e03eaae64
+		sourceLineageTag: video_id
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column title
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 97f357ed-1f9d-421d-a615-06840b4fef84
+		sourceLineageTag: title
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4cc61a73-1cd7-4206-8847-ff9094b5449e
+		sourceLineageTag: description
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 691a2fba-a210-44ba-94da-364df86efae0
+		sourceLineageTag: channel_id
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 82594791-0617-42c7-8c50-92dd9e3099e3
+		sourceLineageTag: category_id
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column definition
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a3044510-56cc-4c54-9e37-0c4193190642
+		sourceLineageTag: definition
+		summarizeBy: none
+		sourceColumn: definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column dimension
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2068d428-cc7e-44db-96e9-b43d00132db7
+		sourceLineageTag: dimension
+		summarizeBy: none
+		sourceColumn: dimension
+
+		annotation SummarizationSetBy = Automatic
+
+	column projection
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4853f371-c68e-480f-8fda-33c36b42dec7
+		sourceLineageTag: projection
+		summarizeBy: none
+		sourceColumn: projection
+
+		annotation SummarizationSetBy = Automatic
+
+	column caption
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 9db910ed-8bd2-47eb-b3ad-6c1a42ec22bf
+		sourceLineageTag: caption
+		summarizeBy: none
+		sourceColumn: caption
+
+		annotation SummarizationSetBy = Automatic
+
+	column licensed_content
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: b5c15a68-fe2f-44b2-b384-10ffa26421f5
+		sourceLineageTag: licensed_content
+		summarizeBy: none
+		sourceColumn: licensed_content
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_seconds
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f48fabb4-d01d-43e0-b2a8-6312a2b30e33
+		sourceLineageTag: duration_seconds
+		summarizeBy: none
+		sourceColumn: duration_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 6b5dc177-b131-44d5-8880-6500d4bfe390
+		sourceLineageTag: published_at
+		summarizeBy: none
+		sourceColumn: published_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c3e18344-032e-4fe8-ba75-24c1716f323e
+		sourceLineageTag: default_url
+		summarizeBy: none
+		sourceColumn: default_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_width
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a9f5a68c-325f-4add-8407-e12f992000e4
+		sourceLineageTag: default_width
+		summarizeBy: none
+		sourceColumn: default_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_height
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bdfffc7f-2755-46fb-a3ff-a856d54ec574
+		sourceLineageTag: default_height
+		summarizeBy: none
+		sourceColumn: default_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9284c21b-1d01-4782-bc71-e8e9127f12cf
+		sourceLineageTag: medium_url
+		summarizeBy: none
+		sourceColumn: medium_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_width
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: de75229a-e467-4574-8c4d-758b835009d6
+		sourceLineageTag: medium_width
+		summarizeBy: none
+		sourceColumn: medium_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_height
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: de131410-5843-4985-91e2-6477e8cbdf3e
+		sourceLineageTag: medium_height
+		summarizeBy: none
+		sourceColumn: medium_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column high_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: adc12bea-a65c-4671-87f7-63c2dc34275e
+		sourceLineageTag: high_url
+		summarizeBy: none
+		sourceColumn: high_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column high_width
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 734b81b4-0a5e-417d-96ca-c9d386eb34c2
+		sourceLineageTag: high_width
+		summarizeBy: none
+		sourceColumn: high_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column high_height
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6739c781-e046-4770-849c-d4b412b48c4d
+		sourceLineageTag: high_height
+		summarizeBy: none
+		sourceColumn: high_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1d479c2c-9d74-43d8-a35c-abe78a288aeb
+		sourceLineageTag: standard_url
+		summarizeBy: none
+		sourceColumn: standard_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_width
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 70f67505-d1d1-4c3b-8ee0-2c1778fa3371
+		sourceLineageTag: standard_width
+		summarizeBy: none
+		sourceColumn: standard_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_height
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9cf74098-9280-4db6-90ff-6df555f1484b
+		sourceLineageTag: standard_height
+		summarizeBy: none
+		sourceColumn: standard_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column maxres_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 685e9c17-cc81-4990-9365-277ec55cb632
+		sourceLineageTag: maxres_url
+		summarizeBy: none
+		sourceColumn: maxres_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column maxres_width
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 164252f9-1514-4748-b644-9e9980ae7e06
+		sourceLineageTag: maxres_width
+		summarizeBy: none
+		sourceColumn: maxres_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column maxres_height
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4547f2a7-fb80-4249-89c8-894ec1bc7f4d
+		sourceLineageTag: maxres_height
+		summarizeBy: none
+		sourceColumn: maxres_height
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_video = entity
+		mode: directLake
+		source
+			entityName: dim_video
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

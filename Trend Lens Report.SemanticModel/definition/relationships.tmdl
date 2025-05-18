@@ -1,0 +1,40 @@
+relationship c452ba6a-a40d-0e9a-e068-455295457647
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dim_video.video_id
+	toColumn: fact_video_engagement.video_id
+
+relationship ce298867-1910-49ec-234f-191595fa8698
+	fromColumn: bridge_video_tag.video_id
+	toColumn: dim_video.video_id
+
+relationship 1b4bfbb5-cc68-2c17-7fa3-d79ff8824288
+	crossFilteringBehavior: bothDirections
+	fromColumn: bridge_video_tag.tag_id
+	toColumn: dim_tag.tag_id
+
+relationship adf75268-f542-2a32-e8fd-9bdea2197357
+	crossFilteringBehavior: bothDirections
+	fromColumn: fact_video_engagement.category_id
+	toColumn: dim_category.category_id
+
+relationship c33a2751-1251-c892-23ee-f6f4a1eb68a6
+	crossFilteringBehavior: bothDirections
+	fromColumn: fact_video_engagement.channel_id
+	toColumn: dim_channel.channel_id
+
+relationship 9766128d-dcd8-b039-30f4-fe3d4a4e1f3a
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_channel_keywords.channel_id
+	toColumn: dim_channel.channel_id
+
+relationship 488af9c9-6f41-04c9-b9a9-5a89994f2de1
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_comment.video_id
+	toColumn: fact_video_engagement.video_id
+
+relationship c8a6d6f8-783a-e3a4-0c94-8745feeef4ba
+	crossFilteringBehavior: bothDirections
+	fromColumn: fact_video_engagement.published_date
+	toColumn: dim_date.date
+

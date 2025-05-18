@@ -1,0 +1,210 @@
+table dim_channel
+	lineageTag: 284dc4a2-988d-4081-8a4c-bb4329b7c9ba
+	sourceLineageTag: [gold].[dim_channel]
+
+	column channel_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 48ebafb9-65e0-4520-b522-0ba43b43c8d5
+		sourceLineageTag: channel_id
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_title
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e0ac29e4-bc79-461f-961e-51617cd1b9a7
+		sourceLineageTag: channel_title
+		summarizeBy: none
+		sourceColumn: channel_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_description
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a5ba225d-756b-4b7a-838f-635d21bb61fc
+		sourceLineageTag: channel_description
+		summarizeBy: none
+		sourceColumn: channel_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column custom_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 59ea2a8b-1106-4f03-96b3-c8afc89f37bb
+		sourceLineageTag: custom_url
+		summarizeBy: none
+		sourceColumn: custom_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: bd9b7793-7956-48a2-bef7-27e55b7c6503
+		sourceLineageTag: published_at
+		summarizeBy: none
+		sourceColumn: published_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 67bb5dc1-3983-4ecb-be68-b38c32ae378a
+		sourceLineageTag: channel_country
+		summarizeBy: none
+		sourceColumn: channel_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column views
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7360fcaf-0d0f-43bc-aa5b-bab41e55f38e
+		sourceLineageTag: views
+		summarizeBy: sum
+		sourceColumn: views
+
+		annotation SummarizationSetBy = Automatic
+
+	column subscribers
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ffbaa7fa-8792-448a-862d-35c181f0aca3
+		sourceLineageTag: subscribers
+		summarizeBy: sum
+		sourceColumn: subscribers
+
+		annotation SummarizationSetBy = Automatic
+
+	column videos
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d8ac246b-f6a0-48d6-bae7-b7816296e7fb
+		sourceLineageTag: videos
+		summarizeBy: sum
+		sourceColumn: videos
+
+		annotation SummarizationSetBy = Automatic
+
+	column hidden_subscribers
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 28579a6d-e7f7-4673-8d17-a3178f200095
+		sourceLineageTag: hidden_subscribers
+		summarizeBy: none
+		sourceColumn: hidden_subscribers
+
+		annotation SummarizationSetBy = Automatic
+
+	column privacy_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 80fb1787-c02b-428f-ad8b-452f39a18a41
+		sourceLineageTag: privacy_status
+		summarizeBy: none
+		sourceColumn: privacy_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_linked
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 6fa071e1-117c-4739-8085-cf793dbf01f2
+		sourceLineageTag: is_linked
+		summarizeBy: none
+		sourceColumn: is_linked
+
+		annotation SummarizationSetBy = Automatic
+
+	column long_uploads_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e53aded2-14df-4d92-84a5-96b18f098a61
+		sourceLineageTag: long_uploads_status
+		summarizeBy: none
+		sourceColumn: long_uploads_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_made_for_kids
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: e9fbb81c-e8d7-4433-ab42-c41f6fbbd385
+		sourceLineageTag: is_made_for_kids
+		summarizeBy: none
+		sourceColumn: is_made_for_kids
+
+		annotation SummarizationSetBy = Automatic
+
+	column icon_default_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 302f5e1b-1461-4b23-a100-c241eab464b1
+		sourceLineageTag: icon_default_url
+		summarizeBy: none
+		sourceColumn: icon_default_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column icon_medium_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9d26fc2c-eca5-4edb-a2ca-b3d59bab9d41
+		sourceLineageTag: icon_medium_url
+		summarizeBy: none
+		sourceColumn: icon_medium_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column icon_high_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e80c436e-b6be-4b63-914b-fc7dda31ac98
+		sourceLineageTag: icon_high_url
+		summarizeBy: none
+		sourceColumn: icon_high_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column banner_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6e1ab37a-c3d1-45dc-9959-021fddb8988a
+		sourceLineageTag: banner_url
+		summarizeBy: none
+		sourceColumn: banner_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_keywords
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2776f35e-8324-4131-9960-9e5ea2fe2826
+		sourceLineageTag: channel_keywords
+		summarizeBy: none
+		sourceColumn: channel_keywords
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_channel = entity
+		mode: directLake
+		source
+			entityName: dim_channel
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

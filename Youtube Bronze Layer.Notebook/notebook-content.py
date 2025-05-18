@@ -132,7 +132,9 @@ VIDEOS_SCHEMA = StructType([
         StructField("likeCount", StringType(), True),
         StructField("favoriteCount", StringType(), True),
         StructField("commentCount", StringType(), True)
-    ]), True)
+    ]), True),
+    StructField("extracted_at", StringType(), True),
+    StructField("data_source", StringType(), True)
 ])
 
 # METADATA ********************

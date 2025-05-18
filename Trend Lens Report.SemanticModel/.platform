@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "SemanticModel",
-    "displayName": "Trend Lens Semantic Model"
+    "displayName": "Trend Lens Report"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "425fe65e-fc94-ad5d-47d3-e15cec62522e"
+    "logicalId": "d0144c68-85de-96c3-4329-78160f76c96a"
   }
 }

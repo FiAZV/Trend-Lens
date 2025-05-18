@@ -1,11 +1,11 @@
-table fact_video_performance
-	lineageTag: 9fe8028d-f672-4525-b638-46fcab3adb9b
-	sourceLineageTag: [gold].[fact_video_performance]
+table fact_video_engagement
+	lineageTag: f7f4acb3-d8ea-48a1-9bb4-9da027c0a97f
+	sourceLineageTag: [gold].[fact_video_engagement]
 
 	column video_id
 		dataType: string
 		sourceProviderType: varchar(8000)
-		lineageTag: f482e891-2034-4a19-a171-1de78dc1ff6f
+		lineageTag: 73c6320e-4159-427e-bc5c-c42dc49b62ec
 		sourceLineageTag: video_id
 		summarizeBy: none
 		sourceColumn: video_id
@@ -15,7 +15,7 @@ table fact_video_performance
 	column channel_id
 		dataType: string
 		sourceProviderType: varchar(8000)
-		lineageTag: 4f0fad21-e9d6-4ede-aa7e-3716b120dd17
+		lineageTag: 489f1c48-5072-4175-bb57-f6f923fa4eb1
 		sourceLineageTag: channel_id
 		summarizeBy: none
 		sourceColumn: channel_id
@@ -26,32 +26,21 @@ table fact_video_performance
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: ef592cc1-c740-4ab6-8a8c-ae2de9ef3e5f
+		lineageTag: bda1a6ec-8efe-46fd-b2b5-0623ae11bcb3
 		sourceLineageTag: category_id
 		summarizeBy: none
 		sourceColumn: category_id
 
 		annotation SummarizationSetBy = Automatic
 
-	column year
-		dataType: int64
-		formatString: 0
-		sourceProviderType: int
-		lineageTag: b60331ec-7d9f-4a56-a6cf-27cbffd76d78
-		sourceLineageTag: year
-		summarizeBy: sum
-		sourceColumn: year
-
-		annotation SummarizationSetBy = Automatic
-
-	column month
-		dataType: int64
-		formatString: 0
-		sourceProviderType: int
-		lineageTag: 93c47098-b65e-45f7-8f89-32d7e65613a2
-		sourceLineageTag: month
-		summarizeBy: sum
-		sourceColumn: month
+	column published_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: c5857f13-31fe-419c-a514-f97391f5f7f0
+		sourceLineageTag: published_date
+		summarizeBy: none
+		sourceColumn: published_date
 
 		annotation SummarizationSetBy = Automatic
 
@@ -59,7 +48,7 @@ table fact_video_performance
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: caade8c1-5a34-4a14-ac48-08c8a509794f
+		lineageTag: ca97f5f9-0294-4d1e-bc5e-d25032d26f5d
 		sourceLineageTag: views
 		summarizeBy: sum
 		sourceColumn: views
@@ -70,7 +59,7 @@ table fact_video_performance
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 97fd030f-b41f-44d0-bff1-1448289ba0f1
+		lineageTag: f2e48581-05c8-4b2e-bcd5-f6afb1d331a3
 		sourceLineageTag: likes
 		summarizeBy: sum
 		sourceColumn: likes
@@ -81,7 +70,7 @@ table fact_video_performance
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 705c805e-8796-482f-9d59-c2c2e869c557
+		lineageTag: c1d5178d-ad90-47d1-9004-00b419f6ea1e
 		sourceLineageTag: comments
 		summarizeBy: sum
 		sourceColumn: comments
@@ -92,27 +81,39 @@ table fact_video_performance
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: e7592752-e71b-47bc-95c4-35f8e8540fb6
+		lineageTag: 024d06b2-7c0a-4144-8e1b-6153cb30529c
 		sourceLineageTag: favorites
 		summarizeBy: sum
 		sourceColumn: favorites
 
 		annotation SummarizationSetBy = Automatic
 
-	column duration
-		dataType: string
-		sourceProviderType: varchar(8000)
-		lineageTag: b0cbdff2-7c84-4b20-84ad-30b7ab10a8a9
-		sourceLineageTag: duration
-		summarizeBy: none
-		sourceColumn: duration
+	column duration_seconds
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b5376b41-1574-4fa1-8fa9-a6f9845df4fe
+		sourceLineageTag: duration_seconds
+		summarizeBy: sum
+		sourceColumn: duration_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_engagement
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4583d43d-61a8-4d21-bea9-29427549cb55
+		sourceLineageTag: total_engagement
+		summarizeBy: sum
+		sourceColumn: total_engagement
 
 		annotation SummarizationSetBy = Automatic
 
 	column engagement_rate
 		dataType: double
 		sourceProviderType: float
-		lineageTag: 02342eff-1141-498e-bbfa-dcea5622d0d6
+		lineageTag: 28f07747-4be8-46da-9d85-f4d412aecfc2
 		sourceLineageTag: engagement_rate
 		summarizeBy: sum
 		sourceColumn: engagement_rate
@@ -121,10 +122,10 @@ table fact_video_performance
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition fact_video_performance = entity
+	partition fact_video_engagement = entity
 		mode: directLake
 		source
-			entityName: fact_video_performance
+			entityName: fact_video_engagement
 			schemaName: gold
 			expressionSource: DatabaseQuery
 

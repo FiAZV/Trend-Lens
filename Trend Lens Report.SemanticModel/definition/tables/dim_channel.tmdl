@@ -199,6 +199,19 @@ table dim_channel
 
 		annotation SummarizationSetBy = Automatic
 
+	column channel_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 09f07263-c80d-4440-b7c5-7d136179def5
+		sourceLineageTag: channel_url
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: channel_url
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_channel = entity
 		mode: directLake
 		source

@@ -114,6 +114,7 @@ def create_dim_video(videos_df, thumbnails_df):
     
     dim_df = videos_df.alias("v") \
         .join(thumbnails_df.alias("t"), F.col("v.id") == F.col("t.video_id"), "left") \
+        .withColumn("video_url", F.concat(F.lit("https://www.youtube.com/watch?v="), F.col("v.id"))) \
         .select(
             F.col("v.id").alias("video_id"),
             "v.title",
@@ -127,6 +128,7 @@ def create_dim_video(videos_df, thumbnails_df):
             "v.licensed_content",
             "v.duration_seconds",
             "v.published_at",
+            "video_url",
             "t.default_url", 
             "t.default_width", 
             "t.default_height",
@@ -171,10 +173,12 @@ def create_dim_channel(channels_df, channels_branding_df):
     
     dim_df = channels_df.alias("c") \
         .join(channels_branding_df.alias("b"), F.col("c.channel_id") == F.col("b.channel_id"), "left") \
+        .withColumn("channel_url", F.concat(F.lit("https://www.youtube.com/channel/"), F.col("c.channel_id"))) \
         .select(
             F.col("c.channel_id"),
             "c.channel_title",
             "c.channel_description",
+            "channel_url",
             "c.custom_url",
             "c.published_at",
             "c.channel_country",
@@ -431,13 +435,13 @@ def main():
     fact_video_engagement_df = create_fact_video_engagement(videos_df)
     
     # Writing tables in Silver Layer
-    dim_date_df.write.format("delta").mode("overwrite").saveAsTable(f"{gold_schema}.dim_date")
-    dim_video_df.write.format("delta").mode("overwrite").saveAsTable(f"{gold_schema}.dim_video")
-    dim_channel_df.write.format("delta").mode("overwrite").saveAsTable(f"{gold_schema}.dim_channel")
-    dim_category_df.write.format("delta").mode("overwrite").saveAsTable(f"{gold_schema}.dim_category")
-    dim_tag_df.write.format("delta").mode("overwrite").saveAsTable(f"{gold_schema}.dim_tag")
-    dim_comment_df.write.format("delta").mode("overwrite").saveAsTable(f"{gold_schema}.dim_comment")
-    dim_channel_keywords_df.write.format("delta").mode("overwrite").saveAsTable(f"{gold_schema}.dim_channel_keywords")
+    dim_date_df.write.format("delta").mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{gold_schema}.dim_date")
+    dim_video_df.write.format("delta").mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{gold_schema}.dim_video")
+    dim_channel_df.write.format("delta").mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{gold_schema}.dim_channel")
+    dim_category_df.write.format("delta").mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{gold_schema}.dim_category")
+    dim_tag_df.write.format("delta").mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{gold_schema}.dim_tag")
+    dim_comment_df.write.format("delta").mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{gold_schema}.dim_comment")
+    dim_channel_keywords_df.write.format("delta").mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{gold_schema}.dim_channel_keywords")
     
     bridge_video_tag_df.write.format("delta").mode("overwrite").saveAsTable(f"{gold_schema}.bridge_video_tag")
     

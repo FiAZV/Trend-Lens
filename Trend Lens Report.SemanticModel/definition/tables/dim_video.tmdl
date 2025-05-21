@@ -132,8 +132,11 @@ table dim_video
 		sourceProviderType: varchar(8000)
 		lineageTag: c3e18344-032e-4fe8-ba75-24c1716f323e
 		sourceLineageTag: default_url
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: default_url
+
+		changedProperty = DataCategory
 
 		annotation SummarizationSetBy = Automatic
 
@@ -274,6 +277,19 @@ table dim_video
 		sourceLineageTag: maxres_height
 		summarizeBy: none
 		sourceColumn: maxres_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column video_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 517d64ce-5390-412b-90d9-329cb9c61054
+		sourceLineageTag: video_url
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: video_url
+
+		changedProperty = DataCategory
 
 		annotation SummarizationSetBy = Automatic
 

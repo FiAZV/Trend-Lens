@@ -21,10 +21,6 @@
 # META   }
 # META }
 
-# MARKDOWN ********************
-
-# **Cria as pastas para os dados brutos**
-
 # CELL ********************
 
 # Criar estrutura de pastas no Lakehouse
@@ -199,6 +195,51 @@ def executar_coleta():
 if __name__ == "__main__":
     resultados = executar_coleta()
     print(f"Resumo da coleta: {resultados}")
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "jupyter_python"
+# META }
+
+# CELL ********************
+
+import pandas as pd
+# Load data into pandas DataFrame from "/lakehouse/default/Files/raw/reddit/comunidades/comunidades_hot-20250423_2255.json"
+df = pd.read_json("/lakehouse/default/Files/raw/reddit/comunidades/comunidades_hot-20250423_2255.json",typ="series")
+display(df)
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "jupyter_python"
+# META }
+
+# CELL ********************
+
+import pandas as pd
+# Load data into pandas DataFrame from "/lakehouse/default/Files/raw/reddit/posts/posts_hot-20250423_2255.json"
+df = pd.read_json("/lakehouse/default/Files/raw/reddit/posts/posts_hot-20250423_2255.json",typ="series")
+display(df)
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "jupyter_python"
+# META }
+
+# CELL ********************
+
+import pandas as pd
+# Load data into pandas DataFrame from "/lakehouse/default/Files/raw/reddit/usuarios/usuarios_hot-20250423_2255.json"
+df = pd.read_json("/lakehouse/default/Files/raw/reddit/usuarios/usuarios_hot-20250423_2255.json",typ="series")
+display(df)
 
 
 # METADATA ********************

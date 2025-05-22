@@ -154,8 +154,11 @@ table dim_channel
 		sourceProviderType: varchar(8000)
 		lineageTag: 302f5e1b-1461-4b23-a100-c241eab464b1
 		sourceLineageTag: icon_default_url
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: icon_default_url
+
+		changedProperty = DataCategory
 
 		annotation SummarizationSetBy = Automatic
 
@@ -164,8 +167,11 @@ table dim_channel
 		sourceProviderType: varchar(8000)
 		lineageTag: 9d26fc2c-eca5-4edb-a2ca-b3d59bab9d41
 		sourceLineageTag: icon_medium_url
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: icon_medium_url
+
+		changedProperty = DataCategory
 
 		annotation SummarizationSetBy = Automatic
 
@@ -174,8 +180,11 @@ table dim_channel
 		sourceProviderType: varchar(8000)
 		lineageTag: e80c436e-b6be-4b63-914b-fc7dda31ac98
 		sourceLineageTag: icon_high_url
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: icon_high_url
+
+		changedProperty = DataCategory
 
 		annotation SummarizationSetBy = Automatic
 
@@ -184,8 +193,11 @@ table dim_channel
 		sourceProviderType: varchar(8000)
 		lineageTag: 6e1ab37a-c3d1-45dc-9959-021fddb8988a
 		sourceLineageTag: banner_url
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: banner_url
+
+		changedProperty = DataCategory
 
 		annotation SummarizationSetBy = Automatic
 

@@ -9,7 +9,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBIDesktopVersion = 2.144.7664.8 (Main)+69a73eef84ec776ff226f506a1fad2e170c47a85
+annotation PBIDesktopVersion = 2.144.7671.7 (Main)+0a12a58cd6b5892ed8d37249bed904135913a71d
 
 annotation PBI_QueryOrder = ["DatabaseQuery"]
 

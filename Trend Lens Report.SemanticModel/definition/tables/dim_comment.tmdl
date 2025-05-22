@@ -37,8 +37,11 @@ table dim_comment
 		sourceProviderType: varchar(8000)
 		lineageTag: 946c542a-2212-4b39-8bb3-a174fcfd6e17
 		sourceLineageTag: author_profile_image_url
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: author_profile_image_url
+
+		changedProperty = DataCategory
 
 		annotation SummarizationSetBy = Automatic
 

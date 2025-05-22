@@ -5,6 +5,7 @@ relationship c452ba6a-a40d-0e9a-e068-455295457647
 	toColumn: fact_video_engagement.video_id
 
 relationship ce298867-1910-49ec-234f-191595fa8698
+	crossFilteringBehavior: bothDirections
 	fromColumn: bridge_video_tag.video_id
 	toColumn: dim_video.video_id
 

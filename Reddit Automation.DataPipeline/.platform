@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Reddit Automation"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ee3663c6-3de3-bbd0-4256-769c0b6549f7"
+  }
+}

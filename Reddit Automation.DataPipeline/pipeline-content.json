@@ -1,0 +1,142 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "139e4caf-8561-81ae-4a9f-33521c615c2c",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "_inlineInstallationEnabled": {
+              "value": "True",
+              "type": "bool"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Execute Get Reddit Data",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "6252f0a1-6a6c-abaf-4ebc-aa516fd36a9d",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Execute Reddit Bronze Layer",
+        "dependsOn": [
+          {
+            "activity": "Wait1",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "4a1e07ab-50f3-921a-4f92-55e43d5d4980",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Execute Reddit Silver Layer",
+        "dependsOn": [
+          {
+            "activity": "Wait2",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "589bea36-b86a-acc8-4674-3803614b9dc4",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Execute Reddit Gold Layer",
+        "dependsOn": [
+          {
+            "activity": "Wait3",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 60
+        },
+        "name": "Wait1",
+        "dependsOn": [
+          {
+            "activity": "Execute Get Reddit Data",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 60
+        },
+        "name": "Wait2",
+        "dependsOn": [
+          {
+            "activity": "Execute Reddit Bronze Layer",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 60
+        },
+        "name": "Wait3",
+        "dependsOn": [
+          {
+            "activity": "Execute Reddit Silver Layer",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

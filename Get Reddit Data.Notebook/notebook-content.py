@@ -4,8 +4,7 @@
 
 # META {
 # META   "kernel_info": {
-# META     "name": "jupyter",
-# META     "jupyter_kernel_name": "python3.11"
+# META     "name": "synapse_pyspark"
 # META   },
 # META   "dependencies": {
 # META     "lakehouse": {
@@ -46,7 +45,7 @@ for pasta in pastas:
 
 # META {
 # META   "language": "python",
-# META   "language_group": "jupyter_python"
+# META   "language_group": "synapse_pyspark"
 # META }
 
 # MARKDOWN ********************
@@ -62,7 +61,7 @@ for pasta in pastas:
 
 # META {
 # META   "language": "python",
-# META   "language_group": "jupyter_python"
+# META   "language_group": "synapse_pyspark"
 # META }
 
 # MARKDOWN ********************
@@ -83,12 +82,11 @@ reddit = praw.Reddit(
     user_agent="Trend-Lens:1.0 (by u/Dry-Peace-8127)",
 )
 
-# Caminho base para salvar os arquivos JSON
-# No Microsoft Fabric, este caminho será substituído pelo caminho apropriado
+# Caminho base para salvar os arquivos JSON Lines
 BASE_PATH = "/lakehouse/default/Files/raw/reddit"
 
-# Função para salvar dados em JSON
-def salvar_json(pasta, nome_arquivo, dados):
+# Função para salvar dados em JSON Lines
+def salvar_jsonl(pasta, nome_arquivo, dados):
     # Cria a pasta se não existir
     caminho_pasta = f"{BASE_PATH}/{pasta}"
     os.makedirs(caminho_pasta, exist_ok=True)
@@ -96,9 +94,11 @@ def salvar_json(pasta, nome_arquivo, dados):
     # Caminho completo do arquivo
     caminho_arquivo = f"{caminho_pasta}/{nome_arquivo}"
     
-    # Salva os dados em formato JSON
+    # Salva cada dicionário como uma linha JSON
     with open(caminho_arquivo, "w", encoding="utf-8") as f:
-        json.dump(dados, f, ensure_ascii=False, indent=4)
+        for item in dados:
+            json.dump(item, f, ensure_ascii=False)
+            f.write('\n')  # Adiciona uma nova linha após cada item
     
     print(f"✅ Arquivo salvo em {caminho_arquivo}")
 
@@ -122,9 +122,9 @@ def coletar_posts_hot(subreddit_nome="all"):
         posts_lista.append(post_info)
     
     data_atual = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-    nome_arquivo = f"posts_hot-{data_atual}.json"
+    nome_arquivo = f"posts_hot-{data_atual}.jsonl"  # Alterado para .jsonl
     
-    salvar_json("posts", nome_arquivo, posts_lista)
+    salvar_jsonl("posts", nome_arquivo, posts_lista)  # Usando a nova função
     
     return posts_lista
 
@@ -154,9 +154,9 @@ def coletar_info_usuarios(posts_lista):
             print(f"❌ Erro ao coletar usuário {nome_usuario}: {e}")
 
     data_atual = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-    nome_arquivo = f"usuarios_hot-{data_atual}.json"
+    nome_arquivo = f"usuarios_hot-{data_atual}.jsonl"  # Alterado para .jsonl
 
-    salvar_json("usuarios", nome_arquivo, usuarios_data)
+    salvar_jsonl("usuarios", nome_arquivo, usuarios_data)  # Usando a nova função
     
     return usuarios_data
 
@@ -172,9 +172,9 @@ def coletar_comunidades(posts_lista):
         comunidades_data.append(comunidade_info)
 
     data_atual = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-    nome_arquivo = f"comunidades_hot-{data_atual}.json"
+    nome_arquivo = f"comunidades_hot-{data_atual}.jsonl"  # Alterado para .jsonl
     
-    salvar_json("comunidades", nome_arquivo, comunidades_data)
+    salvar_jsonl("comunidades", nome_arquivo, comunidades_data)  # Usando a nova função
 
     return comunidades_data
 
@@ -196,55 +196,9 @@ if __name__ == "__main__":
     resultados = executar_coleta()
     print(f"Resumo da coleta: {resultados}")
 
-
 # METADATA ********************
 
 # META {
 # META   "language": "python",
-# META   "language_group": "jupyter_python"
-# META }
-
-# CELL ********************
-
-import pandas as pd
-# Load data into pandas DataFrame from "/lakehouse/default/Files/raw/reddit/comunidades/comunidades_hot-20250423_2255.json"
-df = pd.read_json("/lakehouse/default/Files/raw/reddit/comunidades/comunidades_hot-20250423_2255.json",typ="series")
-display(df)
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "jupyter_python"
-# META }
-
-# CELL ********************
-
-import pandas as pd
-# Load data into pandas DataFrame from "/lakehouse/default/Files/raw/reddit/posts/posts_hot-20250423_2255.json"
-df = pd.read_json("/lakehouse/default/Files/raw/reddit/posts/posts_hot-20250423_2255.json",typ="series")
-display(df)
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "jupyter_python"
-# META }
-
-# CELL ********************
-
-import pandas as pd
-# Load data into pandas DataFrame from "/lakehouse/default/Files/raw/reddit/usuarios/usuarios_hot-20250423_2255.json"
-df = pd.read_json("/lakehouse/default/Files/raw/reddit/usuarios/usuarios_hot-20250423_2255.json",typ="series")
-display(df)
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "jupyter_python"
+# META   "language_group": "synapse_pyspark"
 # META }

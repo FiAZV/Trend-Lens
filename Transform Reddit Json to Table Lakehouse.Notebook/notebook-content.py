@@ -25,16 +25,26 @@
 # Configuração Inicial
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import current_timestamp, lit, col
-from pyspark.sql.types import (StructType, StructField, StringType, BooleanType,
-                              LongType, TimestampType, IntegerType, MapType, ArrayType)
+from pyspark.sql.types import (StructType, StructField, StringType, BooleanType,LongType, TimestampType, IntegerType, MapType, ArrayType)
+import requests
 import json
-import os
-import glob
 
 # Inicializar sessão Spark
 spark = SparkSession.builder.appName("RedditDataExtraction").getOrCreate()
 
-# Schema para a tabela usuarios_reddit
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
+# SCHEMAS
+
+# CELL ********************
+
 USUARIOS_SCHEMA = StructType([
     StructField("nome", StringType(), True),
     StructField("karma_total", LongType(), True),
@@ -45,7 +55,15 @@ USUARIOS_SCHEMA = StructType([
     StructField("data_coleta", StringType(), True)
 ])
 
-# Schema para a tabela posts_reddit
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 POSTS_SCHEMA = StructType([
     StructField("id", StringType(), True),
     StructField("titulo", StringType(), True),
@@ -58,14 +76,34 @@ POSTS_SCHEMA = StructType([
     StructField("data_coleta", StringType(), True)
 ])
 
-# Schema para a tabela comunidades_reddit
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 COMUNIDADES_SCHEMA = StructType([
     StructField("post_id", StringType(), True),
     StructField("subreddit", StringType(), True),
     StructField("data_coleta", StringType(), True)
 ])
 
-# Função para criar tabela Delta (exatamente como no código do YouTube)
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
+# FUNCTIONS
+
+# CELL ********************
+
 def create_delta_table(raw_path, table_name, schema):
     df = spark.read.schema(schema).json(raw_path)
     
@@ -75,42 +113,46 @@ def create_delta_table(raw_path, table_name, schema):
         .mode("overwrite") \
         .saveAsTable(f"Lakehouse.bronze.{table_name}")
 
-# Função principal
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+def drop_delta_tables():
+    spark.sql("DROP TABLE IF EXISTS Lakehouse.bronze.reddit_usuarios")
+    spark.sql("DROP TABLE IF EXISTS Lakehouse.bronze.reddit_posts")
+    spark.sql("DROP TABLE IF EXISTS Lakehouse.bronze.reddit_comunidades")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 def main():
-    # Definir caminhos para os arquivos JSON
-    raw_path       = "/lakehouse/default/Files/raw/reddit"
-    raw_usuarios   = f"{raw_path}/usuarios"
-    raw_posts      = f"{raw_path}/posts"
-    raw_comunidades = f"{raw_path}/comunidades"
+    drop_delta_tables()
 
-    # Definir os nomes das tabelas (com os novos nomes solicitados)
-    table_usuarios = "usuarios_reddit"
-    table_posts = "posts_reddit"
-    table_comunidades = "comunidades_reddit"
+    raw_path = "Files/raw/reddit"
 
-    # Criar as tabelas Delta
-    print("Criando tabela usuarios_reddit...")
+    raw_usuarios = f"{raw_path}/usuarios"
+    table_usuarios = "reddit_usuarios"
     create_delta_table(raw_usuarios, table_usuarios, USUARIOS_SCHEMA)
     
-    print("Criando tabela posts_reddit...")
+    raw_posts = f"{raw_path}/posts"
+    table_posts = "reddit_posts"
     create_delta_table(raw_posts, table_posts, POSTS_SCHEMA)
-    
-    print("Criando tabela comunidades_reddit...")
-    create_delta_table(raw_comunidades, table_comunidades, COMUNIDADES_SCHEMA)
-    
-    print("Todas as tabelas foram criadas com sucesso!")
-    
-    # Verificar as tabelas criadas
-    print("\nVerificando tabela usuarios_reddit:")
-    spark.sql("SELECT * FROM Lakehouse.bronze.usuarios_reddit LIMIT 5").show(truncate=False)
-    
-    print("\nVerificando tabela posts_reddit:")
-    spark.sql("SELECT * FROM Lakehouse.bronze.posts_reddit LIMIT 5").show(truncate=False)
-    
-    print("\nVerificando tabela comunidades_reddit:")
-    spark.sql("SELECT * FROM Lakehouse.bronze.comunidades_reddit LIMIT 5").show(truncate=False)
 
-# Executar o processo principal
+    raw_comunidades = f"{raw_path}/comunidades"
+    table_comunidades = "reddit_comunidades"
+    create_delta_table(raw_comunidades, table_comunidades, COMUNIDADES_SCHEMA)
+
 main()
 
 # METADATA ********************

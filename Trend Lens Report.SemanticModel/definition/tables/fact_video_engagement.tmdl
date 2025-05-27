@@ -46,81 +46,94 @@ table fact_video_engagement
 
 	column views
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: ca97f5f9-0294-4d1e-bc5e-d25032d26f5d
 		sourceLineageTag: views
 		summarizeBy: sum
 		sourceColumn: views
 
+		changedProperty = FormatString
+
 		annotation SummarizationSetBy = Automatic
 
 	column likes
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: f2e48581-05c8-4b2e-bcd5-f6afb1d331a3
 		sourceLineageTag: likes
 		summarizeBy: sum
 		sourceColumn: likes
 
+		changedProperty = FormatString
+
 		annotation SummarizationSetBy = Automatic
 
 	column comments
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: c1d5178d-ad90-47d1-9004-00b419f6ea1e
 		sourceLineageTag: comments
 		summarizeBy: sum
 		sourceColumn: comments
 
+		changedProperty = FormatString
+
 		annotation SummarizationSetBy = Automatic
 
 	column favorites
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: 024d06b2-7c0a-4144-8e1b-6153cb30529c
 		sourceLineageTag: favorites
 		summarizeBy: sum
 		sourceColumn: favorites
 
+		changedProperty = FormatString
+
 		annotation SummarizationSetBy = Automatic
 
 	column duration_seconds
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: b5376b41-1574-4fa1-8fa9-a6f9845df4fe
 		sourceLineageTag: duration_seconds
 		summarizeBy: sum
 		sourceColumn: duration_seconds
 
+		changedProperty = FormatString
+
 		annotation SummarizationSetBy = Automatic
 
 	column total_engagement
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: 4583d43d-61a8-4d21-bea9-29427549cb55
 		sourceLineageTag: total_engagement
 		summarizeBy: sum
 		sourceColumn: total_engagement
 
+		changedProperty = FormatString
+
 		annotation SummarizationSetBy = Automatic
 
 	column engagement_rate
 		dataType: double
+		formatString: #,0.00
 		sourceProviderType: float
 		lineageTag: 28f07747-4be8-46da-9d85-f4d412aecfc2
 		sourceLineageTag: engagement_rate
 		summarizeBy: sum
 		sourceColumn: engagement_rate
 
-		annotation SummarizationSetBy = Automatic
+		changedProperty = FormatString
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation SummarizationSetBy = Automatic
 
 	partition fact_video_engagement = entity
 		mode: directLake

@@ -107,7 +107,7 @@ def coletar_posts_hot(subreddit_nome="all"):
     subreddit = reddit.subreddit(subreddit_nome)
     posts_lista = []
 
-    for post in subreddit.hot(limit=10):
+    for post in subreddit.hot(limit=50):
         post_info = {
             "id": post.id,
             "titulo": post.title,

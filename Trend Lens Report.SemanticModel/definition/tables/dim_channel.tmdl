@@ -65,34 +65,40 @@ table dim_channel
 
 	column views
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: 7360fcaf-0d0f-43bc-aa5b-bab41e55f38e
 		sourceLineageTag: views
 		summarizeBy: sum
 		sourceColumn: views
 
+		changedProperty = FormatString
+
 		annotation SummarizationSetBy = Automatic
 
 	column subscribers
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: ffbaa7fa-8792-448a-862d-35c181f0aca3
 		sourceLineageTag: subscribers
 		summarizeBy: sum
 		sourceColumn: subscribers
 
+		changedProperty = FormatString
+
 		annotation SummarizationSetBy = Automatic
 
 	column videos
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		sourceProviderType: int
 		lineageTag: d8ac246b-f6a0-48d6-bae7-b7816296e7fb
 		sourceLineageTag: videos
 		summarizeBy: sum
 		sourceColumn: videos
+
+		changedProperty = FormatString
 
 		annotation SummarizationSetBy = Automatic
 

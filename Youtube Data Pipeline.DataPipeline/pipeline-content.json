@@ -33,7 +33,7 @@
         "name": "Bronze",
         "dependsOn": [
           {
-            "activity": "Get Data",
+            "activity": "Wait1",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -56,7 +56,7 @@
         "name": "Silver",
         "dependsOn": [
           {
-            "activity": "Bronze",
+            "activity": "Wait2",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -77,6 +77,51 @@
           "secureOutput": false
         },
         "name": "Gold",
+        "dependsOn": [
+          {
+            "activity": "Wait3",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 10
+        },
+        "name": "Wait1",
+        "dependsOn": [
+          {
+            "activity": "Get Data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 10
+        },
+        "name": "Wait2",
+        "dependsOn": [
+          {
+            "activity": "Bronze",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 10
+        },
+        "name": "Wait3",
         "dependsOn": [
           {
             "activity": "Silver",

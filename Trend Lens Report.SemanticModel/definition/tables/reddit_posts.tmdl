@@ -1,0 +1,123 @@
+table reddit_posts
+	lineageTag: 2742db0c-cc9a-4ec6-bfcc-73178f96c1a4
+	sourceLineageTag: [gold].[reddit_posts]
+
+	column id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8406b541-2d7c-4927-bed8-ecea89d387ec
+		sourceLineageTag: id
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column conteudo_post
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4b6f0599-741f-4556-a636-93ee442520fc
+		sourceLineageTag: conteudo_post
+		summarizeBy: none
+		sourceColumn: conteudo_post
+
+		annotation SummarizationSetBy = Automatic
+
+	column autor
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8562879f-7815-468f-aa02-1b7da34d6fc0
+		sourceLineageTag: autor
+		summarizeBy: none
+		sourceColumn: autor
+
+		annotation SummarizationSetBy = Automatic
+
+	column upvotes
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5739e726-b316-41dd-9ccf-95fa4b748adf
+		sourceLineageTag: upvotes
+		summarizeBy: sum
+		sourceColumn: upvotes
+
+		annotation SummarizationSetBy = Automatic
+
+	column comentarios
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 8c07406a-980a-47e9-a277-9567ec5562a3
+		sourceLineageTag: comentarios
+		summarizeBy: sum
+		sourceColumn: comentarios
+
+		annotation SummarizationSetBy = Automatic
+
+	column link
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bb2ff7a3-952a-4770-ba6b-93568733b67e
+		sourceLineageTag: link
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: link
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column comunidade
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0167c662-62dd-4cc2-a412-9e4c2bd78d42
+		sourceLineageTag: comunidade
+		summarizeBy: none
+		sourceColumn: comunidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_coleta
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0d5f3bb8-8543-4b3b-a8f4-b80142f559ee
+		sourceLineageTag: data_coleta
+		summarizeBy: none
+		sourceColumn: data_coleta
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: varchar(8000)
+		lineageTag: b0586418-4f23-42a0-bf41-4e80cc493710
+		sourceLineageTag: data
+		summarizeBy: none
+		sourceColumn: data
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column horario
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d569a174-f596-41e3-9862-add201d1d205
+		sourceLineageTag: horario
+		summarizeBy: none
+		sourceColumn: horario
+
+		annotation SummarizationSetBy = Automatic
+
+	partition reddit_posts = entity
+		mode: directLake
+		source
+			entityName: reddit_posts
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -9,7 +9,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBIDesktopVersion = 2.144.7671.7 (Main)+0a12a58cd6b5892ed8d37249bed904135913a71d
+annotation PBIDesktopVersion = 2.144.7678.1 (Main)+03ff7a4d52fc4bc95d07de5a5c7249d505f89026
 
 annotation PBI_QueryOrder = ["DatabaseQuery"]
 
@@ -24,6 +24,8 @@ ref table dim_date
 ref table bridge_video_tag
 ref table dim_comment
 ref table dim_video
+ref table reddit_posts
+ref table reddit_usuarios
 
 ref cultureInfo en-US
 

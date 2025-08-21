@@ -1,12 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Notebook",
-    "displayName": "Testes",
-    "description": "New notebook"
+    "type": "OrgApp",
+    "displayName": "Trend Lens"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "0a8243bb-9e6b-afcb-4c9d-0071283de06a"
+    "logicalId": "971baba7-0178-be71-41a7-059901484793"
   }
 }

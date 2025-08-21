@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/orgapp/definition/orgAppDefinition/1.0.0/schema.json",
+  "settings": {},
+  "elements": [
+    {
+      "elementType": "item",
+      "elementId": "11e3b4c4-d05e-4467-8e7e-240cc8e4a416",
+      "itemType": "Report",
+      "itemLogicalId": "f3c9994e-29e0-9135-485d-7ed276f3b70d",
+      "displayName": "Trend Lens Report"
+    },
+    {
+      "elementType": "item",
+      "elementId": "a12713ac-b47c-460c-8fae-b9d4520137bf",
+      "itemType": "SemanticModel",
+      "itemLogicalId": "d0144c68-85de-96c3-4329-78160f76c96a",
+      "displayName": "11e3b4c4-d05e-4467-8e7e-240cc8e4a416"
+    }
+  ]
+}

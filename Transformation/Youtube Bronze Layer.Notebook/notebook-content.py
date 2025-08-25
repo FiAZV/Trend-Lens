@@ -8,12 +8,12 @@
 # META   },
 # META   "dependencies": {
 # META     "lakehouse": {
-# META       "default_lakehouse": "09659cea-c84d-4906-be1d-8146403c9777",
+# META       "default_lakehouse": "ae2924b7-5e60-462d-b9ab-7ea0f21771e9",
 # META       "default_lakehouse_name": "Lakehouse",
-# META       "default_lakehouse_workspace_id": "41c1bbe3-1b20-4e9c-8afb-99229f989290",
+# META       "default_lakehouse_workspace_id": "208bbd6c-42ba-400e-8343-f0093a1d2d9d",
 # META       "known_lakehouses": [
 # META         {
-# META           "id": "09659cea-c84d-4906-be1d-8146403c9777"
+# META           "id": "ae2924b7-5e60-462d-b9ab-7ea0f21771e9"
 # META         }
 # META       ]
 # META     }
@@ -39,16 +39,6 @@ spark = SparkSession.builder.appName("YouTubeDataExtraction").getOrCreate()
 # META   "language_group": "synapse_pyspark"
 # META }
 
-# CELL ********************
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
 # MARKDOWN ********************
 
 # # Schemas
@@ -61,8 +51,8 @@ VIDEO_CATEGORIES_SCHEMA = StructType([
     StructField("id", StringType(), True),
     StructField("snippet", StructType([
         StructField("title", StringType(), True),
-        StructField("assignable", StringType(), True),  # normalmente é "true" ou "false" como string
-        StructField("channel_id", StringType(), True)  # normalmente é "true" ou "false" como string
+        StructField("assignable", StringType(), True),
+        StructField("channel_id", StringType(), True)
     ]), True),
     StructField("extracted_at", StringType(), True),
     StructField("data_source", StringType(), True)
@@ -309,7 +299,7 @@ def create_delta_table(raw_path, table_name, schema):
 
 def main():
 
-    raw_path       = "Files/raw/youtube"
+    raw_path       = "Files/landing/youtube"
     raw_categories = f"{raw_path}/categories"
     raw_videos     = f"{raw_path}/videos"
     raw_comments   = f"{raw_path}/comments"

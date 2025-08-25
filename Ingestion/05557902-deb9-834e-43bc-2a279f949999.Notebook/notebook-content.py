@@ -365,7 +365,7 @@ def extract_video_categories():
 
 # CELL ********************
 
-def get_video_category_ids(path: str = "Files/raw/youtube/categories") -> list:
+def get_video_category_ids(path: str = "Files/landing/youtube/categories") -> list:
     
     """
     Lê o arquivo de categorias de vídeos no Lakehouse e retorna uma lista de IDs de categoria.
@@ -492,7 +492,7 @@ def get_channel_ids(videos_df: DataFrame, spark: SparkSession) -> list:
     
     # Tentar ler canais já salvos
     try:
-        existing_channels_df = spark.read.json("Files/raw/youtube/channels")
+        existing_channels_df = spark.read.json("Files/landing/youtube/channels")
         existing_channel_ids = existing_channels_df \
             .select(col("id").alias("channelId")) \
             .distinct() \

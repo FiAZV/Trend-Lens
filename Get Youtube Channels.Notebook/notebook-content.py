@@ -6,12 +6,22 @@
 # META   "kernel_info": {
 # META     "name": "synapse_pyspark"
 # META   },
-# META   "dependencies": {}
+# META   "dependencies": {
+# META     "lakehouse": {
+# META       "default_lakehouse": "ae2924b7-5e60-462d-b9ab-7ea0f21771e9",
+# META       "default_lakehouse_name": "Lakehouse",
+# META       "default_lakehouse_workspace_id": "208bbd6c-42ba-400e-8343-f0093a1d2d9d",
+# META       "known_lakehouses": [
+# META         {
+# META           "id": "ae2924b7-5e60-462d-b9ab-7ea0f21771e9"
+# META         }
+# META       ]
+# META     }
+# META   }
 # META }
 
 # CELL ********************
 
-# Configuração Inicial
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.functions import current_timestamp, lit, col
 from pyspark.sql.types import (
@@ -35,6 +45,32 @@ import re
 
 # CELL ********************
 
+%run "/Workspace/Utils"
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+
+
+print(clean_text("  HELLO FABRIC "))
+print(safe_divide(10, 2))
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 # Inicializar sessão Spark
 spark = SparkSession.builder.appName("YouTubeDataExtractionCategories").getOrCreate()
 
@@ -47,11 +83,17 @@ spark = SparkSession.builder.appName("YouTubeDataExtractionCategories").getOrCre
 
 # CELL ********************
 
-# 1. Configurações da API do YouTube
-API_KEY = "AIzaSyDmAULHlDdg3HNIGeE-k45IMxLj1XoH5CA"
-# API_KEY = "AIzaSyC0O_tDb6CKobRAWv2VBKk_TsVNZ1ZnY_U"
-BASE_URL = "https://www.googleapis.com/"
-REGION_CODE = "BR"
+%run "/Workspace/Utils"
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 
 # METADATA ********************
 

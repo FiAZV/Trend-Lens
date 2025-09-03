@@ -1,0 +1,142 @@
+table fact_video_engagement
+	lineageTag: aca44180-b348-42f7-bde0-6b4d3e2d1035
+	sourceLineageTag: 5b3addb8-3b3f-4b80-9da4-04ab017dfede
+
+	measure 'Engagement Rate' = ```
+			
+			DIVIDE(
+			    SUM(fact_video_engagement[total_engagement]),
+			    SUM(fact_video_engagement[views]),
+			    0 
+			)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d5a01382-2f81-41ae-9ebe-ce3e73aa6bda
+
+	column video_id
+		dataType: string
+		isNullable: false
+		lineageTag: e85cd675-338c-440d-95ac-bf06206eb43e
+		sourceLineageTag: 42245930-6d99-49cd-99de-941c18bb2b78
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = User
+
+	column channel_id
+		dataType: string
+		lineageTag: 92d4316f-5d05-4cad-9268-e4a8c1a38408
+		sourceLineageTag: ca53d610-862e-4d71-b6e0-d75428b4ccc3
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = User
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c3262ae4-00af-4897-a9d1-b4d924da0e56
+		sourceLineageTag: 179f1475-f3a8-4873-9773-dd820cc4c2f1
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = User
+
+	column published_date
+		dataType: dateTime
+		formatString: General Number
+		lineageTag: e644915e-34d1-4d34-8b79-cfcf4f88bfcd
+		sourceLineageTag: 4f73bdf1-0c2a-4587-9165-39400c0b0747
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: published_date
+
+		annotation SummarizationSetBy = User
+
+	column views
+		dataType: int64
+		formatString: 0
+		lineageTag: 52da59ff-a9ae-4aa6-9216-3210ad79500b
+		sourceLineageTag: b4c1ca10-3e81-4179-90e0-dc8fce694896
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: views
+
+		annotation SummarizationSetBy = User
+
+	column likes
+		dataType: int64
+		formatString: 0
+		lineageTag: 7be02520-db88-485e-8830-fce74c42329b
+		sourceLineageTag: ccb22d0c-a290-48af-8c15-fbb7ccc92e8f
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: likes
+
+		annotation SummarizationSetBy = User
+
+	column comments
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ba4067b-f754-4ba3-ac38-97c4d8d30792
+		sourceLineageTag: ec9c8d8d-d139-4e8f-ac83-d7140258c2b7
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: comments
+
+		annotation SummarizationSetBy = User
+
+	column favorites
+		dataType: int64
+		formatString: 0
+		lineageTag: 391fd6ce-1d9c-40de-b65a-297d69a363f8
+		sourceLineageTag: 343788c7-9519-4004-8f7e-996889a1f961
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: favorites
+
+		annotation SummarizationSetBy = User
+
+	column duration_seconds
+		dataType: int64
+		formatString: 0
+		lineageTag: b2ee74ce-3a7e-4e1a-8c5f-955b1c6ca663
+		sourceLineageTag: 2eb8c55e-00ae-44b9-95be-7ec484d25e53
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: duration_seconds
+
+		annotation SummarizationSetBy = User
+
+	column total_engagement
+		dataType: int64
+		formatString: 0
+		lineageTag: 4cbd0fe6-d92a-4830-aca7-9ad74ea0be3c
+		sourceLineageTag: 7a2b8762-4ee9-4082-937c-740c50658a11
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: total_engagement
+
+		annotation SummarizationSetBy = User
+
+	column engagement_rate
+		dataType: double
+		lineageTag: 512e16f6-63eb-41c3-97be-507427622aac
+		sourceLineageTag: 444924cc-524a-4b23-9b4f-37a83a59315b
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: engagement_rate
+
+		annotation SummarizationSetBy = User
+
+	partition fact_video_engagement = entity
+		mode: directQuery
+		source
+			entityName: fact_video_engagement
+			expressionSource: 'DirectQuery to AS - Trend Lens Semantic Model'
+
+	annotation PBI_ResultType = Exception
+

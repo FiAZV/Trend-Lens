@@ -1,0 +1,33 @@
+table dim_tag
+	lineageTag: d2a42a4d-c02d-4225-97c9-ccda8d985ab2
+	sourceLineageTag: d33f7fad-087b-4e15-a15d-3056e5935c70
+
+	column tag_id
+		dataType: string
+		isNullable: false
+		lineageTag: 1c1f04fc-1a9a-444f-982f-c26ff8005d61
+		sourceLineageTag: 3ae4a879-3ad8-4de3-b505-a1c6fcb2de1f
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: tag_id
+
+		annotation SummarizationSetBy = User
+
+	column tag
+		dataType: string
+		lineageTag: 63dc8244-0447-40d8-8cf8-4fa2b38a51ca
+		sourceLineageTag: 000545a4-f50d-4752-b1b3-4fe9a13f36a9
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: tag
+
+		annotation SummarizationSetBy = User
+
+	partition dim_tag = entity
+		mode: directQuery
+		source
+			entityName: dim_tag
+			expressionSource: 'DirectQuery to AS - Trend Lens Semantic Model'
+
+	annotation PBI_ResultType = Exception
+

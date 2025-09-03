@@ -1,0 +1,224 @@
+table dim_channel
+	lineageTag: 1909c113-c8ca-47c3-9bf5-781ca5f13ec6
+	sourceLineageTag: 0b7d3748-e6c7-4b83-b8a6-25d0c6ed8229
+
+	measure 'Views per Video' = DIVIDE(SUM(dim_channel[views]), SUM(dim_channel[videos]), 0)
+		formatString: 0.00
+		lineageTag: b4047fb5-ab58-41b5-8c4f-989aa05f081a
+
+	column channel_id
+		dataType: string
+		isNullable: false
+		lineageTag: a3c4c9ce-0a3e-495b-a522-841b5bc44fc9
+		sourceLineageTag: 634bf423-464a-4b4e-a96d-788846f39f8b
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = User
+
+	column channel_title
+		dataType: string
+		lineageTag: 2fb20caa-6f62-4736-9b1a-1f7961f6c59d
+		sourceLineageTag: b5b8927a-0729-452d-aafa-6bfa0b7c30d0
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: channel_title
+
+		annotation SummarizationSetBy = User
+
+	column channel_description
+		dataType: string
+		lineageTag: f2fd72b1-0b7b-4749-ba86-555bcd0e54ee
+		sourceLineageTag: 1e89aea9-ec4f-435e-bc2d-be833fb212bd
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: channel_description
+
+		annotation SummarizationSetBy = User
+
+	column channel_url
+		dataType: string
+		lineageTag: 88f92934-4da8-4ca5-a8e4-f0b15f592b98
+		sourceLineageTag: 5a60f552-df2b-4532-8855-6b39346d6c5f
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: channel_url
+
+		annotation SummarizationSetBy = User
+
+	column custom_url
+		dataType: string
+		lineageTag: 553c6ea8-f515-412f-a3af-0d64910e2e87
+		sourceLineageTag: 2e013804-6c77-4f6d-ad93-38fd5356b6ff
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: custom_url
+
+		annotation SummarizationSetBy = User
+
+	column published_at
+		dataType: dateTime
+		formatString: General Number
+		lineageTag: d81b8621-fda4-4788-b49c-9c86c1165348
+		sourceLineageTag: a68f46f3-14bb-4f36-8ad8-1ead633fc93b
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: published_at
+
+		annotation SummarizationSetBy = User
+
+	column channel_country
+		dataType: string
+		lineageTag: 6634c504-590c-4de9-9b1c-2b61f9235023
+		sourceLineageTag: 36f58dc4-8f2b-4ba4-9a1b-d39b5eaf05e3
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: channel_country
+
+		annotation SummarizationSetBy = User
+
+	column views
+		dataType: int64
+		formatString: 0
+		lineageTag: 2688498d-82b0-4a69-a4a9-44ee42a72e95
+		sourceLineageTag: 18d92ee4-e9dd-42ec-93cb-2ff9613b9bee
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: views
+
+		annotation SummarizationSetBy = User
+
+	column subscribers
+		dataType: int64
+		formatString: 0
+		lineageTag: 8593a590-1e7b-4430-9a68-528de6f40eea
+		sourceLineageTag: f38ef818-08bf-4fe6-b534-5cc2de16fdf5
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: subscribers
+
+		annotation SummarizationSetBy = User
+
+	column videos
+		dataType: int64
+		formatString: 0
+		lineageTag: 650375a1-a76d-479b-baee-2353f5172927
+		sourceLineageTag: d7d58300-4869-410b-89cd-37234a3275ca
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: videos
+
+		annotation SummarizationSetBy = User
+
+	column hidden_subscribers
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: edcf8e42-4e9f-4a19-9798-e4860530b824
+		sourceLineageTag: d61eb971-c4c2-437f-8e04-8a84b5b08a1f
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: hidden_subscribers
+
+		annotation SummarizationSetBy = User
+
+	column privacy_status
+		dataType: string
+		lineageTag: eaf6efb4-712e-4a11-a3b8-cacfd398ca66
+		sourceLineageTag: 27965abd-4d32-4c0e-b5be-acc3d7dcc357
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: privacy_status
+
+		annotation SummarizationSetBy = User
+
+	column is_linked
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d729a7a5-dc45-4d6e-83a6-a95c0a1fa0b2
+		sourceLineageTag: 6c13a02e-1eb1-439b-8151-b3c31a5eaf97
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: is_linked
+
+		annotation SummarizationSetBy = User
+
+	column long_uploads_status
+		dataType: string
+		lineageTag: 8107deb2-9776-4afa-b4bd-f97d0e27bbc5
+		sourceLineageTag: cc1b8533-0bfd-4621-80b7-70199891eca1
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: long_uploads_status
+
+		annotation SummarizationSetBy = User
+
+	column is_made_for_kids
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 74b22022-dbbd-48ed-bf80-a9b4f424f70a
+		sourceLineageTag: be1de469-cf56-4ad5-9f59-28e081626ae8
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: is_made_for_kids
+
+		annotation SummarizationSetBy = User
+
+	column icon_default_url
+		dataType: string
+		lineageTag: 27093563-7c5c-4a26-9b7d-1300a5748706
+		sourceLineageTag: 78f58585-3dba-46a5-b225-4e47a20001f3
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: icon_default_url
+
+		annotation SummarizationSetBy = User
+
+	column icon_medium_url
+		dataType: string
+		lineageTag: 72932d02-7d8c-42c4-ae74-a4056a0d34ba
+		sourceLineageTag: 4a9e6ab9-3a11-41fa-8953-5ca2167dc49c
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: icon_medium_url
+
+		annotation SummarizationSetBy = User
+
+	column icon_high_url
+		dataType: string
+		lineageTag: 6455c752-bde4-4073-b5fa-240290406cf1
+		sourceLineageTag: e7661b8f-37dd-4d2c-bcde-40a8f0be6a09
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: icon_high_url
+
+		annotation SummarizationSetBy = User
+
+	column banner_url
+		dataType: string
+		lineageTag: 03237676-8e24-4d17-9f76-e799cdf31174
+		sourceLineageTag: 4c3b2b2a-055d-4328-9038-0a415c7e11f7
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: banner_url
+
+		annotation SummarizationSetBy = User
+
+	column channel_keywords
+		dataType: string
+		lineageTag: 15fe1d80-6313-47cd-afd2-64b90f8ddae8
+		sourceLineageTag: 4f2f1647-263e-40a2-a864-15c51e17ae01
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: channel_keywords
+
+		annotation SummarizationSetBy = User
+
+	partition dim_channel = entity
+		mode: directQuery
+		source
+			entityName: dim_channel
+			expressionSource: 'DirectQuery to AS - Trend Lens Semantic Model'
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,33 @@
+table bridge_video_tag
+	lineageTag: c8f84eec-6cbc-41e7-bd4c-0aab48dd3f1b
+	sourceLineageTag: [gold].[bridge_video_tag]
+
+	column video_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 887567e2-b3bf-45cb-9edc-ab646db325b2
+		sourceLineageTag: video_id
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column tag_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dfc2b0fa-4fb0-4759-99ee-e8affe074acb
+		sourceLineageTag: tag_id
+		summarizeBy: none
+		sourceColumn: tag_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition bridge_video_tag = entity
+		mode: directLake
+		source
+			entityName: bridge_video_tag
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

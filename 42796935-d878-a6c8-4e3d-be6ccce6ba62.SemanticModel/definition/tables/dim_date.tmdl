@@ -1,0 +1,130 @@
+table dim_date
+	lineageTag: 89e9fa45-9d51-4e90-a07a-5f2d11c202d1
+	sourceLineageTag: 3f95a481-917e-4a4f-a049-53a1c80a6ea7
+
+	column date
+		dataType: dateTime
+		isNullable: false
+		formatString: General Number
+		lineageTag: fd77cb37-c890-421f-b7bc-e7d569d9361b
+		sourceLineageTag: a0a23d5e-a42f-434b-a137-882889adcc58
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = User
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: bd806d30-d192-4628-98d8-f74d38da1bdc
+		sourceLineageTag: 582a576e-0763-452e-86a1-040289fdbb58
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = User
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e54d0bf-faf5-452b-9250-a087dc054ec9
+		sourceLineageTag: cee7ddd8-37f4-4760-b2ff-4e8ca487020b
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = User
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: 04675027-6bb5-4a5c-9941-465b100cdc2f
+		sourceLineageTag: dacec9b9-3061-43f2-8136-a873f4114c5b
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = User
+
+	column day
+		dataType: int64
+		formatString: 0
+		lineageTag: 19e569a1-f6fe-4e7e-bba0-0fac71c03935
+		sourceLineageTag: 356e04ab-e68a-49ec-bf4b-072c436fea96
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: day
+
+		annotation SummarizationSetBy = User
+
+	column week
+		dataType: int64
+		formatString: 0
+		lineageTag: c2192cca-c2fe-4d30-9809-e7333ada6cdd
+		sourceLineageTag: ea349e93-a056-4db9-9317-b84fd1df0136
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: week
+
+		annotation SummarizationSetBy = User
+
+	column day_of_week
+		dataType: string
+		lineageTag: 57c61964-40b4-4515-8969-983b85b009eb
+		sourceLineageTag: 9632910a-5b3f-49e6-bc7e-592636e62d62
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = User
+
+	column day_name_short
+		dataType: string
+		lineageTag: 6d20bd4f-707c-48a8-8ef4-52afcf0ae76e
+		sourceLineageTag: afc89beb-48c4-4d1d-94de-5ab8b8ac3b3e
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: day_name_short
+
+		annotation SummarizationSetBy = User
+
+	column month_name
+		dataType: string
+		lineageTag: 52cd123e-5b37-4b72-95db-bad8c6bf240b
+		sourceLineageTag: 7fe52348-2875-48f5-a8de-8246949d0229
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = User
+
+	column month_name_short
+		dataType: string
+		lineageTag: 8a902827-7e17-44a8-9b18-ad26982022b2
+		sourceLineageTag: 7c8ad697-a26f-4f90-876c-df139b213870
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: month_name_short
+
+		annotation SummarizationSetBy = User
+
+	column is_weekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8747be4d-6f24-4d3e-8a5b-12660b7d070f
+		sourceLineageTag: 829deb7e-11b8-4001-82e4-0906c58b7fc5
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = User
+
+	partition dim_date = entity
+		mode: directQuery
+		source
+			entityName: dim_date
+			expressionSource: 'DirectQuery to AS - Trend Lens Semantic Model'
+
+	annotation PBI_ResultType = Exception
+

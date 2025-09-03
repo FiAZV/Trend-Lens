@@ -1,0 +1,133 @@
+table fact_video_engagement
+	lineageTag: 5b3addb8-3b3f-4b80-9da4-04ab017dfede
+	sourceLineageTag: [gold].[fact_video_engagement]
+
+	column video_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 42245930-6d99-49cd-99de-941c18bb2b78
+		sourceLineageTag: video_id
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ca53d610-862e-4d71-b6e0-d75428b4ccc3
+		sourceLineageTag: channel_id
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 179f1475-f3a8-4873-9773-dd820cc4c2f1
+		sourceLineageTag: category_id
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 4f73bdf1-0c2a-4587-9165-39400c0b0747
+		sourceLineageTag: published_date
+		summarizeBy: none
+		sourceColumn: published_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column views
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b4c1ca10-3e81-4179-90e0-dc8fce694896
+		sourceLineageTag: views
+		summarizeBy: sum
+		sourceColumn: views
+
+		annotation SummarizationSetBy = Automatic
+
+	column likes
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ccb22d0c-a290-48af-8c15-fbb7ccc92e8f
+		sourceLineageTag: likes
+		summarizeBy: sum
+		sourceColumn: likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column comments
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ec9c8d8d-d139-4e8f-ac83-d7140258c2b7
+		sourceLineageTag: comments
+		summarizeBy: sum
+		sourceColumn: comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column favorites
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 343788c7-9519-4004-8f7e-996889a1f961
+		sourceLineageTag: favorites
+		summarizeBy: sum
+		sourceColumn: favorites
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_seconds
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2eb8c55e-00ae-44b9-95be-7ec484d25e53
+		sourceLineageTag: duration_seconds
+		summarizeBy: sum
+		sourceColumn: duration_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_engagement
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 7a2b8762-4ee9-4082-937c-740c50658a11
+		sourceLineageTag: total_engagement
+		summarizeBy: sum
+		sourceColumn: total_engagement
+
+		annotation SummarizationSetBy = Automatic
+
+	column engagement_rate
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 444924cc-524a-4b23-9b4f-37a83a59315b
+		sourceLineageTag: engagement_rate
+		summarizeBy: sum
+		sourceColumn: engagement_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_video_engagement = entity
+		mode: directLake
+		source
+			entityName: fact_video_engagement
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

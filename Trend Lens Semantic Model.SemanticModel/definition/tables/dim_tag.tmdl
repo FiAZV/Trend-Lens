@@ -1,0 +1,33 @@
+table dim_tag
+	lineageTag: d33f7fad-087b-4e15-a15d-3056e5935c70
+	sourceLineageTag: [gold].[dim_tag]
+
+	column tag_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3ae4a879-3ad8-4de3-b505-a1c6fcb2de1f
+		sourceLineageTag: tag_id
+		summarizeBy: none
+		sourceColumn: tag_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column tag
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 000545a4-f50d-4752-b1b3-4fe9a13f36a9
+		sourceLineageTag: tag
+		summarizeBy: none
+		sourceColumn: tag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_tag = entity
+		mode: directLake
+		source
+			entityName: dim_tag
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

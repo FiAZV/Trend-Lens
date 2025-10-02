@@ -22,6 +22,8 @@ ref table dim_tag
 ref table fact_video_engagement
 ref table dim_date
 ref table dim_comment
+ref table dim_comments_sentiment
+ref table dim_videos_clusters
 
 ref cultureInfo en-US
 

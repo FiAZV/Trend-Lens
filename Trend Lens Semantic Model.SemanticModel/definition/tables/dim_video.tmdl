@@ -48,7 +48,7 @@ table dim_video
 		sourceProviderType: int
 		lineageTag: 7b6ed101-1527-466d-a91e-6c5f312a233e
 		sourceLineageTag: category_id
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: category_id
 
 		annotation SummarizationSetBy = Automatic
@@ -111,7 +111,7 @@ table dim_video
 		sourceProviderType: int
 		lineageTag: 03b50d76-cef1-46de-8666-9465d7c0da3c
 		sourceLineageTag: duration_seconds
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: duration_seconds
 
 		annotation SummarizationSetBy = Automatic

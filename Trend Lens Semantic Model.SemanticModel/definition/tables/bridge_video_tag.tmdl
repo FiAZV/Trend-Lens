@@ -10,6 +10,8 @@ table bridge_video_tag
 		summarizeBy: none
 		sourceColumn: video_id
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column tag_id
@@ -20,6 +22,8 @@ table bridge_video_tag
 		summarizeBy: none
 		sourceColumn: tag_id
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	partition bridge_video_tag = entity
@@ -28,6 +32,8 @@ table bridge_video_tag
 			entityName: bridge_video_tag
 			schemaName: gold
 			expressionSource: DatabaseQuery
+
+	changedProperty = IsHidden
 
 	annotation PBI_ResultType = Table
 

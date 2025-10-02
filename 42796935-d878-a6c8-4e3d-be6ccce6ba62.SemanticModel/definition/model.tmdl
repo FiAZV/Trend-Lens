@@ -10,7 +10,7 @@ annotation PBI_QueryOrder = ["DirectQuery to AS - Trend Lens Semantic Model"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.142.1277.0 (25.04)+014fde450f93691fc9537f0758d73d1c5df153ef
+annotation PBI_ProTooling = ["WebModelingEdit"]
 
 ref table dim_channel
 ref table fact_video_engagement

@@ -30,3 +30,11 @@ relationship de19d633-a912-7dcc-1c08-379e5b72e498
 	fromColumn: fact_video_engagement.video_id
 	toColumn: dim_video.video_id
 
+relationship c732220a-cb87-25a6-e67e-0177a69dcfe4
+	fromColumn: dim_video.video_id
+	toColumn: dim_videos_clusters.video_id
+
+relationship fe12d33d-322f-f085-202e-ac1478a854a6
+	fromColumn: dim_comment.comment_id
+	toColumn: dim_comments_sentiment.comment_id
+

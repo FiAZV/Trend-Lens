@@ -1,0 +1,211 @@
+table dim_comments_sentiment
+	lineageTag: b47853ec-398a-4e27-93dd-ac88f5817d80
+	sourceLineageTag: [gold].[dim_comments_sentiment]
+
+	column comment_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4945e2e3-83d6-41a4-ba14-4899f8441d85
+		sourceLineageTag: comment_id
+		summarizeBy: none
+		sourceColumn: comment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column video_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 409f9767-662d-4c15-bd11-8155f3a1e1d3
+		sourceLineageTag: video_id
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_display_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9a873722-cc33-46d8-97f2-41773e6cda28
+		sourceLineageTag: author_display_name
+		summarizeBy: none
+		sourceColumn: author_display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_profile_image_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e5c013a3-30ce-4299-bd69-f3b2d80357b9
+		sourceLineageTag: author_profile_image_url
+		summarizeBy: none
+		sourceColumn: author_profile_image_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_channel_url
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bf463456-fade-46e6-a43c-9ca06b627a89
+		sourceLineageTag: author_channel_url
+		summarizeBy: none
+		sourceColumn: author_channel_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_channel_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 325220cb-5585-4587-b8f3-dca10f1dc089
+		sourceLineageTag: author_channel_id
+		summarizeBy: none
+		sourceColumn: author_channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column video_channel_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ff3751ed-5c43-403e-a747-138c58f815bb
+		sourceLineageTag: video_channel_id
+		summarizeBy: none
+		sourceColumn: video_channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_text
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 69c33ded-fa5a-46c9-98a4-951c9c84e1dc
+		sourceLineageTag: comment_text
+		summarizeBy: none
+		sourceColumn: comment_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_text_original
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 27c0d04b-44b2-4024-ac1c-1d7e2a0af763
+		sourceLineageTag: comment_text_original
+		summarizeBy: none
+		sourceColumn: comment_text_original
+
+		annotation SummarizationSetBy = Automatic
+
+	column can_rate
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 47cc9833-4452-498c-a8ba-a5c1fefb0f3f
+		sourceLineageTag: can_rate
+		summarizeBy: none
+		sourceColumn: can_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column viewer_rating
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e632fb6a-cf91-4ec9-b60b-443af944c4d8
+		sourceLineageTag: viewer_rating
+		summarizeBy: none
+		sourceColumn: viewer_rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column likes
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 96fa4d5f-a18d-4047-b19f-769e8456af28
+		sourceLineageTag: likes
+		summarizeBy: none
+		sourceColumn: likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: bd94e423-cf7b-41ff-a7dc-e7e74a44dffa
+		sourceLineageTag: published_at
+		summarizeBy: none
+		sourceColumn: published_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 44e1bd8c-5c67-4d87-9da7-9d08cb549c47
+		sourceLineageTag: updated_at
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_source
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 416a86e1-13e1-4096-bd98-d0800887952f
+		sourceLineageTag: data_source
+		summarizeBy: none
+		sourceColumn: data_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column extracted_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: ab7b26b6-321c-49d7-a94d-5c9b39248e2b
+		sourceLineageTag: extracted_at
+		summarizeBy: none
+		sourceColumn: extracted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column ingestion_timestamp
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: b2277193-540c-46a6-b78d-ae390e028334
+		sourceLineageTag: ingestion_timestamp
+		summarizeBy: none
+		sourceColumn: ingestion_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column sentiment
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f28548ce-2a91-462d-be7c-2b6ec5f2138a
+		sourceLineageTag: sentiment
+		summarizeBy: none
+		sourceColumn: sentiment
+
+		annotation SummarizationSetBy = Automatic
+
+	column confidence
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 9872de8c-10d2-46f0-bf92-be52187eab27
+		sourceLineageTag: confidence
+		summarizeBy: none
+		sourceColumn: confidence
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_comments_sentiment = entity
+		mode: directLake
+		source
+			entityName: dim_comments_sentiment
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

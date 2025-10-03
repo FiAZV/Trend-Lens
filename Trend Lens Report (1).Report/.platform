@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Trend Lens Report (1)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "be8e312a-5aee-8a81-4da2-88648536c1be"
+  }
+}

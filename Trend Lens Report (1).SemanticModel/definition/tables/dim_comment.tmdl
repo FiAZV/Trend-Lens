@@ -1,0 +1,131 @@
+table dim_comment
+	lineageTag: 26a6bd61-a48b-48b9-8c1a-c21a413bad09
+
+	column comment_id
+		dataType: string
+		lineageTag: 17cc0b00-360f-4ee1-931e-e5116c0ae7ce
+		summarizeBy: none
+		sourceColumn: comment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column video_id
+		dataType: string
+		lineageTag: f6b73799-c336-460f-aea5-e9e92fba7925
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_display_name
+		dataType: string
+		lineageTag: 6f22f4a5-cd22-4ed1-9766-62b4d00058d2
+		summarizeBy: none
+		sourceColumn: author_display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_profile_image_url
+		dataType: string
+		lineageTag: d1b07da4-d341-4fac-bb82-83656660f3d6
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: author_profile_image_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_channel_url
+		dataType: string
+		lineageTag: d9a234d1-ebc3-40ee-8ece-bf5e4aefac27
+		summarizeBy: none
+		sourceColumn: author_channel_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_channel_id
+		dataType: string
+		lineageTag: a12597ac-0e1e-4d7d-a2a9-958224954576
+		summarizeBy: none
+		sourceColumn: author_channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_text
+		dataType: string
+		lineageTag: 01dbbae2-bb0d-4b11-b7b0-10c5270a3df3
+		summarizeBy: none
+		sourceColumn: comment_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_text_original
+		dataType: string
+		lineageTag: b2b4f76e-bdd6-4488-b87f-0078ba8af95e
+		summarizeBy: none
+		sourceColumn: comment_text_original
+
+		annotation SummarizationSetBy = Automatic
+
+	column can_rate
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 16de65ed-fc6f-4fa3-a142-c0e364e5b7bd
+		summarizeBy: none
+		sourceColumn: can_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column viewer_rating
+		dataType: string
+		lineageTag: 3bf0d684-b391-4b1d-8662-982295a323c6
+		summarizeBy: none
+		sourceColumn: viewer_rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column likes
+		dataType: int64
+		formatString: 0
+		lineageTag: 00e3c27d-0650-4903-97d7-01a873524d88
+		summarizeBy: sum
+		sourceColumn: likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_published_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8e243190-740c-465c-9981-cc4b61040972
+		summarizeBy: none
+		sourceColumn: comment_published_at
+
+		variation Variation
+			isDefault
+			relationship: c9cc5b10-2c0e-426f-aa47-c6cb2ba52140
+			defaultHierarchy: LocalDateTable_2f43ca62-a07c-41f7-858d-a7532f8e7397.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d5c2c1a2-14f8-4d8a-b576-362285fce476
+		summarizeBy: none
+		sourceColumn: comment_updated_at
+
+		variation Variation
+			isDefault
+			relationship: c0f62a65-e690-47df-8608-2cfeee2ad4ba
+			defaultHierarchy: LocalDateTable_b8d8b512-ed89-4ab9-97e3-357ce976211e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_comment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_dim_comment = Source{[Schema="gold",Item="dim_comment"]}[Data]
+				in
+				    gold_dim_comment
+

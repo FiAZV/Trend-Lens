@@ -1,0 +1,91 @@
+relationship c196b826-8d41-4712-9935-36c8a226119d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_channel.published_at
+	toColumn: LocalDateTable_d463c757-a1df-4cc7-a967-b9510d858ab7.Date
+
+relationship c9cc5b10-2c0e-426f-aa47-c6cb2ba52140
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_comment.comment_published_at
+	toColumn: LocalDateTable_2f43ca62-a07c-41f7-858d-a7532f8e7397.Date
+
+relationship c0f62a65-e690-47df-8608-2cfeee2ad4ba
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_comment.comment_updated_at
+	toColumn: LocalDateTable_b8d8b512-ed89-4ab9-97e3-357ce976211e.Date
+
+relationship faea9c67-28fe-4279-980d-9185ff453991
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_comments_sentiment.published_at
+	toColumn: LocalDateTable_dadc6a1e-547f-4f5e-9ad0-191e6339e264.Date
+
+relationship 16fc188f-cdaa-4667-9d40-be13948bc86d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_comments_sentiment.updated_at
+	toColumn: LocalDateTable_7ba5c7ab-a95b-4d49-83a8-32918b60628f.Date
+
+relationship e2e36d99-bacb-4c22-8024-8b32d58a62be
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_comments_sentiment.extracted_at
+	toColumn: LocalDateTable_a64be220-4551-4db7-be4a-37cfe409473e.Date
+
+relationship 46d1ac1a-3526-476a-a11e-08e10900f8e4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_comments_sentiment.ingestion_timestamp
+	toColumn: LocalDateTable_d9b2bd57-8bb8-4f12-911b-0eb101b3dbec.Date
+
+relationship c62cb868-8e1a-4f36-8ae8-caff244eb118
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date.date
+	toColumn: LocalDateTable_821c3a3b-a00f-4235-9bce-73a1387776cf.Date
+
+relationship d786538f-537a-4772-8475-1e165304b146
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_video.published_at
+	toColumn: LocalDateTable_65767d27-24a6-443e-9f88-fed6f61c226e.Date
+
+relationship 380bb250-9e83-e444-43f2-4fe5812cc9c1
+	fromColumn: fact_video_engagement.published_date
+	toColumn: dim_date.date
+
+relationship 39c6c5d5-039b-5d55-399f-73c7b5c7532b
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: fact_video_engagement.video_id
+	toColumn: dim_video.video_id
+
+relationship c015f430-4f30-8109-86c1-8ebe09b901d1
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dim_videos_clusters.video_id
+	toColumn: dim_video.video_id
+
+relationship 8a40cb5e-f882-d871-8ba3-8c6dabadd126
+	fromColumn: fact_video_engagement.channel_id
+	toColumn: dim_channel.channel_id
+
+relationship 4998611e-499c-2abf-db42-54b32c722cf6
+	fromColumn: fact_video_engagement.category_id
+	toColumn: dim_category.category_id
+
+relationship 261863fe-945d-4ce6-31ab-343c6b7225ee
+	fromColumn: dim_channel_keywords.channel_id
+	toColumn: dim_channel.channel_id
+
+relationship 8c86f3e5-c16f-2959-ae91-b3aee9dfc9e6
+	fromColumn: bridge_video_tag.video_id
+	toColumn: dim_video.video_id
+
+relationship 755773f8-36ff-0e20-1965-63d206424c44
+	fromColumn: bridge_video_tag.tag_id
+	toColumn: dim_tag.tag_id
+
+relationship 62ada332-d7c2-9fa5-5fe6-aa348568705a
+	fromColumn: dim_comment.video_id
+	toColumn: fact_video_engagement.video_id
+
+relationship ec900f7e-fa01-9f87-085b-1e583be88e49
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dim_comments_sentiment.comment_id
+	toColumn: dim_comment.comment_id
+

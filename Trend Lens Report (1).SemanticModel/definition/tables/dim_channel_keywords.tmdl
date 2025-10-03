@@ -1,0 +1,28 @@
+table dim_channel_keywords
+	lineageTag: f26b2fe5-58dd-439a-a009-85946b383e8e
+
+	column channel_id
+		dataType: string
+		lineageTag: 897e222e-5ebd-4982-ad0f-33b9a9dd00aa
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column keyword
+		dataType: string
+		lineageTag: 5bae8976-2497-416c-9258-e18246371ca6
+		summarizeBy: none
+		sourceColumn: keyword
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_channel_keywords = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_dim_channel_keywords = Source{[Schema="gold",Item="dim_channel_keywords"]}[Data]
+				in
+				    gold_dim_channel_keywords
+

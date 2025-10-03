@@ -1,0 +1,35 @@
+table _measures
+	lineageTag: 2f26ef7d-cda9-4b82-824c-d7f6b7768d54
+
+	measure 'Engagement Rate' = ```
+			
+			DIVIDE(
+			    SUM(fact_video_engagement[total_engagement]),
+			    SUM(fact_video_engagement[views]),
+			    0 
+			)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b834eb70-3adb-481a-aa9f-e56aac5348a9
+
+	measure 'Views per Video' = DIVIDE(SUM(dim_channel[views]), SUM(dim_channel[videos]), 0)
+		lineageTag: c69a9835-f288-4c44-a245-698bd2ade9c3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Comments' = DISTINCTCOUNT(dim_comment[comment_id])
+		formatString: 0
+		lineageTag: edbf75f5-0891-4b20-b1d8-3cc0c8d0beb8
+
+	partition _measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

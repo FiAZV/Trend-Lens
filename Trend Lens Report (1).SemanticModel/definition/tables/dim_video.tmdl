@@ -1,0 +1,248 @@
+table dim_video
+	lineageTag: 48079c6c-9ce6-47f3-9a8f-03e5341917f3
+
+	column video_id
+		dataType: string
+		lineageTag: db284153-ee1c-44f6-8063-88949e9528f3
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column title
+		dataType: string
+		lineageTag: ba233250-0b80-4a99-ada0-3b57ccb6fcc0
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 34b6e21a-d007-4d8e-9faa-98e4b89a96ea
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_id
+		dataType: string
+		lineageTag: 121f5707-8636-455f-a6a7-ce973364d7dc
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 512fdbe9-cc1f-4b48-bc44-025ba840b072
+		summarizeBy: sum
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column definition
+		dataType: string
+		lineageTag: 713b6f95-6d42-4451-9e77-6391864e5565
+		summarizeBy: none
+		sourceColumn: definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column dimension
+		dataType: string
+		lineageTag: cff6fadf-3582-4bb1-8d2c-5681021cfefe
+		summarizeBy: none
+		sourceColumn: dimension
+
+		annotation SummarizationSetBy = Automatic
+
+	column projection
+		dataType: string
+		lineageTag: 91e21fcf-643a-4047-be3e-40ed744ee708
+		summarizeBy: none
+		sourceColumn: projection
+
+		annotation SummarizationSetBy = Automatic
+
+	column caption
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0d7b797c-134c-481e-a6b2-d11e5e4cadc4
+		summarizeBy: none
+		sourceColumn: caption
+
+		annotation SummarizationSetBy = Automatic
+
+	column licensed_content
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 47133d2d-f364-45a7-b1be-6637370964cd
+		summarizeBy: none
+		sourceColumn: licensed_content
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_seconds
+		dataType: int64
+		formatString: 0
+		lineageTag: 2121c481-b27a-42e2-83a7-827643329c2e
+		summarizeBy: sum
+		sourceColumn: duration_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7721b289-e26f-4bb3-925a-43269bbf74e1
+		summarizeBy: none
+		sourceColumn: published_at
+
+		variation Variation
+			isDefault
+			relationship: d786538f-537a-4772-8475-1e165304b146
+			defaultHierarchy: LocalDateTable_65767d27-24a6-443e-9f88-fed6f61c226e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column video_url
+		dataType: string
+		lineageTag: 3bc6d324-6c42-4577-af57-3783450f0374
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: video_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_url
+		dataType: string
+		lineageTag: 7085e400-8488-4ba4-8b5e-580f931e53ca
+		summarizeBy: none
+		sourceColumn: default_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_width
+		dataType: string
+		lineageTag: f9d15736-f14f-44d2-ac1c-1ac611c686e5
+		summarizeBy: none
+		sourceColumn: default_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_height
+		dataType: string
+		lineageTag: 7d057d49-84b0-4266-b300-881a8d31c8e5
+		summarizeBy: none
+		sourceColumn: default_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_url
+		dataType: string
+		lineageTag: 3c2af7c8-51ee-4924-b149-274b8856f197
+		summarizeBy: none
+		sourceColumn: medium_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_width
+		dataType: string
+		lineageTag: a1976f17-c9e8-48e8-bb8d-680cbc2b8c2e
+		summarizeBy: none
+		sourceColumn: medium_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column medium_height
+		dataType: string
+		lineageTag: 6ec44640-1554-4cca-a8cf-35fbd3889325
+		summarizeBy: none
+		sourceColumn: medium_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column high_url
+		dataType: string
+		lineageTag: 19025e70-ba0f-474b-a005-201ea61f065c
+		summarizeBy: none
+		sourceColumn: high_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column high_width
+		dataType: string
+		lineageTag: 137d3e6b-ac8c-42b0-accc-568a9305e830
+		summarizeBy: none
+		sourceColumn: high_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column high_height
+		dataType: string
+		lineageTag: 2ff6be27-25b4-4d24-bbc6-4e4ea9be085e
+		summarizeBy: none
+		sourceColumn: high_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_url
+		dataType: string
+		lineageTag: 190efe44-6a0c-491a-9bac-e491cff5199e
+		summarizeBy: none
+		sourceColumn: standard_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_width
+		dataType: string
+		lineageTag: 2133d9d7-ed2e-42af-97c0-8317ad66a135
+		summarizeBy: none
+		sourceColumn: standard_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_height
+		dataType: string
+		lineageTag: b02b72ef-6e6c-4dee-9f48-48ead8621b40
+		summarizeBy: none
+		sourceColumn: standard_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column maxres_url
+		dataType: string
+		lineageTag: 137d6e0a-4d31-483e-a2cb-94ce3f4037f8
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: maxres_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column maxres_width
+		dataType: string
+		lineageTag: b12e50b6-0828-4c05-b5ff-f4ff3f28e7e1
+		summarizeBy: none
+		sourceColumn: maxres_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column maxres_height
+		dataType: string
+		lineageTag: daa1c6a3-718d-4afe-92b2-1c4500f3f7ed
+		summarizeBy: none
+		sourceColumn: maxres_height
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_video = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_dim_video = Source{[Schema="gold",Item="dim_video"]}[Data]
+				in
+				    gold_dim_video
+

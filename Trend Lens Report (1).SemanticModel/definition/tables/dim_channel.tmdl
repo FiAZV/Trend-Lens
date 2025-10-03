@@ -1,0 +1,184 @@
+table dim_channel
+	lineageTag: 424fa40d-c4f8-4e68-bd09-9d1b56618284
+
+	column channel_id
+		dataType: string
+		lineageTag: c328c1ad-b964-4062-bba0-a9fd10314fbf
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_title
+		dataType: string
+		lineageTag: 3b72f7d9-6e33-44fc-8f02-a725ad62a017
+		summarizeBy: none
+		sourceColumn: channel_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_description
+		dataType: string
+		lineageTag: 64218d0c-8888-4ab4-a527-c9d8fc9fc88c
+		summarizeBy: none
+		sourceColumn: channel_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_url
+		dataType: string
+		lineageTag: 6c3d7bbf-6d07-4fd9-bd4d-01302576422b
+		summarizeBy: none
+		sourceColumn: channel_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column custom_url
+		dataType: string
+		lineageTag: 70b909e6-9836-47a6-9c05-24f21be37baf
+		summarizeBy: none
+		sourceColumn: custom_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d8063113-5ed6-47b3-944a-7b9fd122e732
+		summarizeBy: none
+		sourceColumn: published_at
+
+		variation Variation
+			isDefault
+			relationship: c196b826-8d41-4712-9935-36c8a226119d
+			defaultHierarchy: LocalDateTable_d463c757-a1df-4cc7-a967-b9510d858ab7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_country
+		dataType: string
+		lineageTag: 56a081b6-546f-4756-9753-39aa279ea9a7
+		summarizeBy: none
+		sourceColumn: channel_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column views
+		dataType: int64
+		formatString: 0
+		lineageTag: c1e5f4dc-d05b-4dbb-b48f-e27115cbed22
+		summarizeBy: sum
+		sourceColumn: views
+
+		annotation SummarizationSetBy = Automatic
+
+	column subscribers
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a75a459-f6c3-4200-9f56-03ae5a8e792c
+		summarizeBy: sum
+		sourceColumn: subscribers
+
+		annotation SummarizationSetBy = Automatic
+
+	column videos
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f158eb4-c7ae-4ddc-8f11-b7093756a30c
+		summarizeBy: sum
+		sourceColumn: videos
+
+		annotation SummarizationSetBy = Automatic
+
+	column hidden_subscribers
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8f3cd7d1-cde8-4818-8cc8-c0a162ae2155
+		summarizeBy: none
+		sourceColumn: hidden_subscribers
+
+		annotation SummarizationSetBy = Automatic
+
+	column privacy_status
+		dataType: string
+		lineageTag: 2d9247d8-8d18-40ae-90e5-d1b4f063d948
+		summarizeBy: none
+		sourceColumn: privacy_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_linked
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5cb4a276-504c-41b0-8b31-1450600de089
+		summarizeBy: none
+		sourceColumn: is_linked
+
+		annotation SummarizationSetBy = Automatic
+
+	column long_uploads_status
+		dataType: string
+		lineageTag: 25509664-e644-4930-8a6c-5ba8a5564179
+		summarizeBy: none
+		sourceColumn: long_uploads_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_made_for_kids
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9afdb7bb-d8d1-49c5-9597-0c1eae4c59c7
+		summarizeBy: none
+		sourceColumn: is_made_for_kids
+
+		annotation SummarizationSetBy = Automatic
+
+	column icon_default_url
+		dataType: string
+		lineageTag: 3a17430e-57c7-4155-81c4-b81a3db97c81
+		summarizeBy: none
+		sourceColumn: icon_default_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column icon_medium_url
+		dataType: string
+		lineageTag: edbef32b-89b3-448b-adfe-69568400ba7e
+		summarizeBy: none
+		sourceColumn: icon_medium_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column icon_high_url
+		dataType: string
+		lineageTag: 6181a5f9-a01e-4cf1-a6f6-3e60bf744108
+		summarizeBy: none
+		sourceColumn: icon_high_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column banner_url
+		dataType: string
+		lineageTag: 2037fae5-a0a2-4c28-9aa2-6460d6a601ba
+		summarizeBy: none
+		sourceColumn: banner_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_keywords
+		dataType: string
+		lineageTag: bfbdcd0a-694c-432b-8864-1a02c455fb11
+		summarizeBy: none
+		sourceColumn: channel_keywords
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_channel = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_dim_channel = Source{[Schema="gold",Item="dim_channel"]}[Data]
+				in
+				    gold_dim_channel
+

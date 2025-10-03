@@ -1,0 +1,192 @@
+table dim_comments_sentiment
+	lineageTag: 8cff2428-1fd8-4d49-b791-e0613ad317f5
+
+	column comment_id
+		dataType: string
+		lineageTag: 88b05324-f6d8-4020-bad6-822f47b19c0c
+		summarizeBy: none
+		sourceColumn: comment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column video_id
+		dataType: string
+		lineageTag: b793f5ba-dd2a-4d3a-8e0b-7fea6caf4561
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_display_name
+		dataType: string
+		lineageTag: ae828952-671a-4420-afa0-608976b156a7
+		summarizeBy: none
+		sourceColumn: author_display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_profile_image_url
+		dataType: string
+		lineageTag: 64daf5fb-7097-4b8a-8676-6890e1dbcb2a
+		summarizeBy: none
+		sourceColumn: author_profile_image_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_channel_url
+		dataType: string
+		lineageTag: 9c4391fc-c833-43c1-98bb-10724618cd91
+		summarizeBy: none
+		sourceColumn: author_channel_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column author_channel_id
+		dataType: string
+		lineageTag: 4c127565-14be-4904-be77-3212469fd785
+		summarizeBy: none
+		sourceColumn: author_channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column video_channel_id
+		dataType: string
+		lineageTag: caad1ca9-660f-4de0-80c7-e84a05a0a037
+		summarizeBy: none
+		sourceColumn: video_channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_text
+		dataType: string
+		lineageTag: 34341478-f38e-4970-893f-36a1e81c1003
+		summarizeBy: none
+		sourceColumn: comment_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment_text_original
+		dataType: string
+		lineageTag: a19cfbcc-cf40-4407-9909-d1db68c37250
+		summarizeBy: none
+		sourceColumn: comment_text_original
+
+		annotation SummarizationSetBy = Automatic
+
+	column can_rate
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cb21ed26-84a0-4034-827b-72d1da9c26ef
+		summarizeBy: none
+		sourceColumn: can_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column viewer_rating
+		dataType: string
+		lineageTag: ebbbf68d-1d18-42b1-a762-ce127703c3af
+		summarizeBy: none
+		sourceColumn: viewer_rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column likes
+		dataType: int64
+		formatString: 0
+		lineageTag: 827c9a5b-1ae4-42f4-bff7-859624f78377
+		summarizeBy: sum
+		sourceColumn: likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 28c8a749-9901-40df-a7b0-8c1ebf8a966d
+		summarizeBy: none
+		sourceColumn: published_at
+
+		variation Variation
+			isDefault
+			relationship: faea9c67-28fe-4279-980d-9185ff453991
+			defaultHierarchy: LocalDateTable_dadc6a1e-547f-4f5e-9ad0-191e6339e264.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dffa08e8-86f3-4fad-8b55-547e414fdb92
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 16fc188f-cdaa-4667-9d40-be13948bc86d
+			defaultHierarchy: LocalDateTable_7ba5c7ab-a95b-4d49-83a8-32918b60628f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_source
+		dataType: string
+		lineageTag: a59188c3-9abc-4bbd-b29a-84a56289d3c8
+		summarizeBy: none
+		sourceColumn: data_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column extracted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 48238704-cdb0-4dff-bc4e-d74b942d6c54
+		summarizeBy: none
+		sourceColumn: extracted_at
+
+		variation Variation
+			isDefault
+			relationship: e2e36d99-bacb-4c22-8024-8b32d58a62be
+			defaultHierarchy: LocalDateTable_a64be220-4551-4db7-be4a-37cfe409473e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ingestion_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 693fdf71-c67c-44e5-affc-1f7033405249
+		summarizeBy: none
+		sourceColumn: ingestion_timestamp
+
+		variation Variation
+			isDefault
+			relationship: 46d1ac1a-3526-476a-a11e-08e10900f8e4
+			defaultHierarchy: LocalDateTable_d9b2bd57-8bb8-4f12-911b-0eb101b3dbec.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column sentiment
+		dataType: string
+		lineageTag: 1f12dee8-abfd-4574-8ccc-1da2cfa4ceb6
+		summarizeBy: none
+		sourceColumn: sentiment
+
+		annotation SummarizationSetBy = Automatic
+
+	column confidence
+		dataType: double
+		lineageTag: 8645c014-15f8-4171-ba32-32de25285deb
+		summarizeBy: sum
+		sourceColumn: confidence
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_comments_sentiment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_dim_comments_sentiment = Source{[Schema="gold",Item="dim_comments_sentiment"]}[Data]
+				in
+				    gold_dim_comments_sentiment
+

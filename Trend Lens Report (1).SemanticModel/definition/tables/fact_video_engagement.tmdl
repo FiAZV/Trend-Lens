@@ -1,0 +1,116 @@
+table fact_video_engagement
+	lineageTag: ea6afe71-77eb-48c0-af68-9a32c1540335
+
+	column video_id
+		dataType: string
+		lineageTag: 1a9d75c2-806c-4cb8-8334-8357ded55768
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_id
+		dataType: string
+		lineageTag: 7ee006e5-232c-4990-8434-4d9c790101e1
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0644a7f3-d43e-4ae3-8875-17804011060b
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column published_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 17e1ebfe-98c9-4461-b036-b3ce53ae7abd
+		summarizeBy: none
+		sourceColumn: published_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column views
+		dataType: int64
+		formatString: 0
+		lineageTag: 5450e918-5377-4af9-9cc5-27ede904b7ed
+		summarizeBy: sum
+		sourceColumn: views
+
+		annotation SummarizationSetBy = Automatic
+
+	column likes
+		dataType: int64
+		formatString: 0
+		lineageTag: 409f9e26-d596-4d76-9118-9c2a65ff1205
+		summarizeBy: sum
+		sourceColumn: likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column comments
+		dataType: int64
+		formatString: 0
+		lineageTag: ce219b48-e422-44e0-8df8-d2ded6e85d03
+		summarizeBy: sum
+		sourceColumn: comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column favorites
+		dataType: int64
+		formatString: 0
+		lineageTag: a2b5d8ba-3af1-48cc-a57e-1bf2de29b575
+		summarizeBy: sum
+		sourceColumn: favorites
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_seconds
+		dataType: int64
+		formatString: 0
+		lineageTag: 254a9248-9e66-4b29-b27d-8f5c5265a0de
+		summarizeBy: sum
+		sourceColumn: duration_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_engagement
+		dataType: int64
+		formatString: 0
+		lineageTag: 3faf3773-fc84-4c76-9d00-2075226a4b41
+		summarizeBy: sum
+		sourceColumn: total_engagement
+
+		annotation SummarizationSetBy = Automatic
+
+	column engagement_rate
+		dataType: double
+		lineageTag: e358ab96-2ecd-41d0-ad05-8cd6a1c48579
+		summarizeBy: sum
+		sourceColumn: engagement_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_video_engagement = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_fact_video_engagement = Source{[Schema="gold",Item="fact_video_engagement"]}[Data]
+				in
+				    gold_fact_video_engagement
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,33 @@
+table dim_category
+	lineageTag: 0fd72b88-9338-4a6b-9fb0-e85840ad3a62
+
+	column category_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b91a71d-d4d9-4bca-9e38-7c3e68e113ad
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_name
+		dataType: string
+		lineageTag: cf2f1cda-c87c-491a-9842-f455e5e72097
+		summarizeBy: none
+		sourceColumn: category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_category = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_dim_category = Source{[Schema="gold",Item="dim_category"]}[Data]
+				in
+				    gold_dim_category
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

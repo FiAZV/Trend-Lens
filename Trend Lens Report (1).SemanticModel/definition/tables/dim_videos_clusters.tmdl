@@ -1,0 +1,29 @@
+table dim_videos_clusters
+	lineageTag: fa5774f6-2159-42c0-b0eb-9c079dae2f78
+
+	column video_id
+		dataType: string
+		lineageTag: 7629a9eb-0cb6-48e8-a3d5-a3a8ff54b21e
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster
+		dataType: int64
+		formatString: 0
+		lineageTag: c4970dae-30bf-4db4-b6d8-38baa1a4fe4c
+		summarizeBy: sum
+		sourceColumn: cluster
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_videos_clusters = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_dim_videos_clusters = Source{[Schema="gold",Item="dim_videos_clusters"]}[Data]
+				in
+				    gold_dim_videos_clusters
+

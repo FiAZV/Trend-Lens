@@ -1,0 +1,32 @@
+table bridge_video_tag
+	lineageTag: 30596457-649a-40d4-85da-f9ee669926b4
+
+	column video_id
+		dataType: string
+		lineageTag: 932cf0ad-e8db-4713-aa8d-e1e165818b23
+		summarizeBy: none
+		sourceColumn: video_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column tag_id
+		dataType: string
+		lineageTag: 87fe8dd8-38dd-4533-87f7-b7db3d06d4f3
+		summarizeBy: none
+		sourceColumn: tag_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition bridge_video_tag = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_bridge_video_tag = Source{[Schema="gold",Item="bridge_video_tag"]}[Data]
+				in
+				    gold_bridge_video_tag
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

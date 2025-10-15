@@ -1,20 +1,28 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/orgapp/definition/orgAppDefinition/1.0.0/schema.json",
-  "settings": {},
+  "settings": {
+    "experienceSettings": {
+      "navigationPane": {
+        "isHidden": false,
+        "isCollapsed": false,
+        "independentPageNavigation": true
+      }
+    }
+  },
   "elements": [
     {
       "elementType": "item",
-      "elementId": "11e3b4c4-d05e-4467-8e7e-240cc8e4a416",
+      "elementId": "5a6dd8be-cb8c-44a5-ab08-48d52ffc6687",
       "itemType": "Report",
-      "itemLogicalId": "f3c9994e-29e0-9135-485d-7ed276f3b70d",
-      "displayName": "Trend Lens Report"
+      "itemLogicalId": "be8e312a-5aee-8a81-4da2-88648536c1be",
+      "displayName": "Trend Lens Report (1)"
     },
     {
       "elementType": "item",
-      "elementId": "a12713ac-b47c-460c-8fae-b9d4520137bf",
+      "elementId": "0842b18a-450d-41e0-a22c-b10024dfb8e1",
       "itemType": "SemanticModel",
-      "itemLogicalId": "d0144c68-85de-96c3-4329-78160f76c96a",
-      "displayName": "11e3b4c4-d05e-4467-8e7e-240cc8e4a416"
+      "itemLogicalId": "8d98400f-335e-b953-4ad0-09625f184f04",
+      "displayName": "5a6dd8be-cb8c-44a5-ab08-48d52ffc6687"
     }
   ]
 }

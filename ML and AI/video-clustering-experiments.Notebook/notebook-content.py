@@ -22,6 +22,17 @@
 
 # CELL ********************
 
+%pip install sentence-transformers
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 import pandas as pd
@@ -50,9 +61,7 @@ def read_videos_table():
             c.category,
             v.title,
             v.views,
-            v.likes,
-            v.favorites,
-            v.comments,
+            (v.likes + v.favorites + v.comments) as engagements,
             v.duration_seconds
         FROM 
             Lakehouse.silver.youtube_videos AS v
@@ -114,6 +123,7 @@ def encode_categories(df, input_col="category", output_col="category_vec"):
 # CELL ********************
 
 def normalize_numeric_features(df, input_cols, output_col="engagement_scaled"):
+    
     # Montar vetor de entrada com métricas
     assembler = VectorAssembler(inputCols=input_cols, outputCol="engagement_features")
     df = assembler.transform(df)
@@ -164,11 +174,7 @@ def main():
     df = convert_array_to_vector(df, input_col="embedding", output_col="embedding_vec")
 
     # Normalizar métricas de engajamento
-    df = normalize_numeric_features(
-        df,
-        input_cols=["views", "likes", "comments", "favorites", "duration_seconds"],
-        output_col="engagement_scaled"
-    )
+    df = normalize_numeric_features(df,input_cols=["views", "engagements", "duration_seconds"], output_col="engagement_scaled")
 
     # Montar vetor final de features
     assembler_all = VectorAssembler(
@@ -178,7 +184,7 @@ def main():
     df = assembler_all.transform(df)
 
     # Clusterização
-    kmeans = KMeans(k=10, seed=42, featuresCol="features", predictionCol="cluster")
+    kmeans = KMeans(k=3, seed=42, featuresCol="features", predictionCol="cluster")
     df = kmeans.fit(df).transform(df)
 
     # Criar tabela Gold no Lakehouse

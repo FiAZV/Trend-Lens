@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Pipeline_Gera_Relatorios_Semanais"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c0b3932e-ff12-8ea8-4299-27be756af18c"
+  }
+}

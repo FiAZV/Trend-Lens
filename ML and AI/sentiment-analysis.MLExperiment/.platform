@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "MLExperiment",
+    "displayName": "sentiment-analysis"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "edc1c96e-6a82-8976-4051-357346f137e3"
+  }
+}

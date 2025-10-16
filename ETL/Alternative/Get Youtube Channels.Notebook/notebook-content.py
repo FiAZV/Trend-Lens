@@ -22,12 +22,8 @@
 
 # CELL ********************
 
-from pyspark.sql import SparkSession, DataFrame
-from pyspark.sql.functions import current_timestamp, lit, col
-from pyspark.sql.types import (
-    StructType, StructField, StringType, BooleanType,
-    LongType, TimestampType, IntegerType, MapType, ArrayType
-)
+from pyspark.sql import SparkSession, DataFrame, functions as F
+from pyspark.sql.types import *
 from functools import reduce
 from typing import List
 import requests
@@ -47,7 +43,7 @@ from datetime import date
 # CELL ********************
 
 # Inicializar sessão Spark
-spark = SparkSession.builder.appName("YouTubeDataExtractionCategories").getOrCreate()
+spark = SparkSession.builder.appName("youtubeCategoriesIngestion").getOrCreate()
 
 # METADATA ********************
 
@@ -61,7 +57,6 @@ spark = SparkSession.builder.appName("YouTubeDataExtractionCategories").getOrCre
 # Configurações da API do YouTube
 API_KEY = "AIzaSyC0O_tDb6CKobRAWv2VBKk_TsVNZ1ZnY_U"
 BASE_URL = "https://www.googleapis.com/"
-REGION_CODE = "BR"
 
 # METADATA ********************
 
@@ -134,7 +129,7 @@ def extract_video_categories():
     endpoint = 'youtube/v3/videoCategories'
     params = {
         'part': 'snippet',
-        'regionCode': REGION_CODE
+        'regionCode': 'BR'
     }
     
     data = fetch_youtube_data(endpoint, params)
@@ -142,10 +137,31 @@ def extract_video_categories():
     if data and 'items' in data:
         df = spark.createDataFrame(data['items'], schema=VIDEO_CATEGORIES_SCHEMA)
 
-        return df.withColumn("extracted_at", current_timestamp()) \
-                .withColumn("data_source", lit(endpoint))
+        return df.withColumn("extracted_at", F.current_timestamp()) \
+                .withColumn("data_source", F.lit(endpoint))
 
     return spark.createDataFrame([], schema=VIDEO_CATEGORIES_SCHEMA)
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+def create_delta_table(df, table_name, schema):
+
+    # Escrever com tratamento de schema
+    lakehouse_name = "Lakehouse"
+    schema_name = "dbo"
+
+
+    df.write.format("delta") \
+        .option("mergeSchema", "true") \
+        .mode("append") \
+        .saveAsTable(f"{lakehouse_name}.{schema_name}.{table_name}")
 
 # METADATA ********************
 
@@ -164,12 +180,13 @@ def main():
     Salva os dados em arquivos JSON particionados por tipo.
     """
 
-    today_date = date.today().strftime("%Y-%m-%d")
-    landing_path = f"Files/landing/youtube/categories/{today_date}"
+    table_categories = "bronze_youtube_categories"
 
     print("Extraindo categorias de vídeos...")
     categories_df = extract_video_categories()
-    categories_df.write.mode("overwrite").json(landing_path)
+
+    print("Criando tabela de categorias")
+    create_delta_table(categories_df, table_categories, VIDEO_CATEGORIES_SCHEMA)
 
     print("Pipeline de extração finalizado com sucesso.")
 

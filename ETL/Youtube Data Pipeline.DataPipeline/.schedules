@@ -5,11 +5,13 @@
       "enabled": true,
       "jobType": "Execute",
       "configuration": {
-        "type": "Cron",
-        "startDateTime": "2025-09-04T07:00:00",
-        "endDateTime": "2025-12-31T19:47:00",
+        "type": "Daily",
+        "startDateTime": "2025-10-16T00:00:00",
+        "endDateTime": "2025-12-31T23:59:00",
         "localTimeZoneId": "E. South America Standard Time",
-        "interval": 120
+        "times": [
+          "12:00"
+        ]
       }
     }
   ]

@@ -28,6 +28,7 @@ table dim_channel
 	column channel_url
 		dataType: string
 		lineageTag: 6c3d7bbf-6d07-4fd9-bd4d-01302576422b
+		dataCategory: WebUrl
 		summarizeBy: none
 		sourceColumn: channel_url
 
@@ -136,6 +137,7 @@ table dim_channel
 	column icon_default_url
 		dataType: string
 		lineageTag: 3a17430e-57c7-4155-81c4-b81a3db97c81
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: icon_default_url
 
@@ -152,6 +154,7 @@ table dim_channel
 	column icon_high_url
 		dataType: string
 		lineageTag: 6181a5f9-a01e-4cf1-a6f6-3e60bf744108
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: icon_high_url
 

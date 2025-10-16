@@ -107,3 +107,48 @@ print("\n✅ Tabela de relatórios recriada com sucesso, agora sem a coluna 'sta
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+# Célula de Manutenção - Limpar Tabela de Relatórios
+
+# Define o nome completo da tabela que queremos limpar
+nome_tabela_para_limpar = "gold.fact_relatorios_gerados"
+
+print(f"Iniciando a limpeza da tabela: {nome_tabela_para_limpar}...")
+
+try:
+    # O comando TRUNCATE TABLE é o mais eficiente para apagar todas as linhas
+    # de uma tabela, mantendo sua estrutura intacta.
+    spark.sql(f"TRUNCATE TABLE {nome_tabela_para_limpar}")
+    
+    print("\n✅ Tabela limpa com sucesso!")
+    
+    # Vamos verificar se a tabela está realmente vazia
+    print("\nVerificando o conteúdo da tabela após a limpeza:")
+    df_verificacao = spark.read.table(nome_tabela_para_limpar)
+    
+    if df_verificacao.count() == 0:
+        print("   - Confirmação: A tabela está vazia.")
+    else:
+        print(f"   - Atenção: A tabela ainda contém {df_verificacao.count()} linhas.")
+
+except Exception as e:
+    print(f"\n❌ Ocorreu um erro ao tentar limpar a tabela: {e}")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }

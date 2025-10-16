@@ -35,6 +35,7 @@
 
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
+from pyspark.sql.types import ArrayType, DoubleType
 import pandas as pd
 
 from sentence_transformers import SentenceTransformer
@@ -42,7 +43,6 @@ from pyspark.sql.functions import pandas_udf, PandasUDFType
 from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler, StandardScaler
 from pyspark.ml.clustering import KMeans
 from pyspark.ml.linalg import Vectors, VectorUDT
-from pyspark.sql.functions import udf
 
 # METADATA ********************
 
@@ -178,7 +178,7 @@ def main():
 
     # Montar vetor final de features
     assembler_all = VectorAssembler(
-        inputCols=["engagement_scaled", "embedding_vec", "category_vec"],
+        inputCols=["engagement_scaled","embedding_vec"],#, "embedding_vec"], #"category_vec"],
         outputCol="features"
     )
     df = assembler_all.transform(df)

@@ -1,0 +1,63 @@
+table fact_reports
+	lineageTag: defe37b3-0747-4c1b-ac65-96783c705537
+
+	column id_da_empresa
+		dataType: int64
+		formatString: 0
+		lineageTag: af2ba39d-1f4a-4ba8-95f5-d5992df6ef58
+		summarizeBy: sum
+		sourceColumn: id_da_empresa
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_da_empresa
+		dataType: string
+		lineageTag: 4fbf2d4f-14e3-46ea-a852-af960e684fc5
+		summarizeBy: none
+		sourceColumn: nome_da_empresa
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_geracao
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 26829d8d-f146-4c32-9a83-924fc12e69d5
+		summarizeBy: none
+		sourceColumn: data_geracao
+
+		variation Variation
+			isDefault
+			relationship: b4b4dcea-12ae-4a18-8e8b-e6592c5e51d5
+			defaultHierarchy: LocalDateTable_a70579b8-70f9-4da1-8688-643054d236ca.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column texto_relatorio
+		dataType: string
+		lineageTag: 640a9399-a504-4d77-85cc-753206145345
+		summarizeBy: none
+		sourceColumn: texto_relatorio
+
+		annotation SummarizationSetBy = Automatic
+
+	column versao_prompt
+		dataType: string
+		lineageTag: 3fa0741e-08d4-477a-8a4d-cc714864e259
+		summarizeBy: none
+		sourceColumn: versao_prompt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_reports = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("wnzujvs3fmievaydw5e3c6leo4-ns6ywif2iiheba2d6aetuhjntu.datawarehouse.fabric.microsoft.com", "Lakehouse"),
+				    gold_fact_video_engagement = Source{[Schema="gold",Item="fact_relatorios_gerados"]}[Data]
+				in
+				    gold_fact_video_engagement
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

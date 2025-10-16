@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["bridge_video_tag","dim_category","dim_channel","dim_channel_keywords","dim_comment","dim_comments_sentiment","dim_date","dim_tag","dim_video","dim_videos_clusters","fact_video_engagement","_measures"]
+annotation PBI_QueryOrder = ["bridge_video_tag","dim_category","dim_channel","dim_channel_keywords","dim_comment","dim_comments_sentiment","dim_date","dim_tag","dim_video","dim_videos_clusters","fact_video_engagement","fact_reports","sample report","_measures"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -36,6 +36,9 @@ ref table LocalDateTable_65767d27-24a6-443e-9f88-fed6f61c226e
 ref table dim_videos_clusters
 ref table fact_video_engagement
 ref table _measures
+ref table fact_reports
+ref table LocalDateTable_a70579b8-70f9-4da1-8688-643054d236ca
+ref table 'sample report'
 
 ref cultureInfo en-US
 

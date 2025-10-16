@@ -119,6 +119,7 @@ table dim_video
 	column default_url
 		dataType: string
 		lineageTag: 7085e400-8488-4ba4-8b5e-580f931e53ca
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: default_url
 

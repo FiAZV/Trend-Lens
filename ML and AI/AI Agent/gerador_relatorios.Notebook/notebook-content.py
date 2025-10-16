@@ -49,6 +49,8 @@ from IPython.display import display, Markdown
 from datetime import datetime
 import json
 import requests
+from IPython.display import HTML
+import time
 
 # Funções do PySpark
 from pyspark.sql.functions import col, collect_list, concat_ws, desc, monotonically_increasing_id, current_timestamp, lit
@@ -196,10 +198,10 @@ SUA_SENHA_DE_APP = "uezt aazs anbi wkit"
 
 
 # Configuração do modelo e da tabela de destino
-model = genai.GenerativeModel('gemini-2.5-flash') 
-generation_config = genai.GenerationConfig(temperature=0.3)
+model = genai.GenerativeModel('gemini-2.0-flash-lite') 
+generation_config = genai.GenerationConfig(temperature=0.1)
 nome_tabela_relatorios = "gold.fact_relatorios_gerados"
-versao_atual_prompt = "3.0"
+versao_atual_prompt = "4.0"
 
 # Pega a lista de clientes do DataFrame pandas que já carregamos na célula anterior
 lista_de_clientes = df_clientes.to_dict('records')
@@ -232,77 +234,90 @@ for i, cliente in enumerate(lista_de_clientes):
     data_hoje = datetime.now().strftime('%d/%m/%Y')
     prompt_final = f"""
     [INSTRUÇÕES]
-Você é um Analista de Tendências de Marketing Digital e Estrategista de Conteúdo de Vídeo. Sua tarefa é gerar um relatório de recomendações para a empresa em [DADOS DA EMPRESA], usando DOIS CONJUNTOS DE DADOS DE MERCADO para sua análise:
-1.  [TENDÊNCIAS DE PERFORMANCE]: Use estes dados para entender **O QUE** funciona em termos de visualizações e engajamento.
-2.  [ANÁLISE DE SENTIMENTO DA AUDIÊNCIA]: Use estes dados para entender **O PORQUÊ** certos vídeos geram reações positivas ou negativas.
+    Sua tarefa é gerar um relatório de recomendações de vídeo DIRETAMENTE EM FORMATO HTML.
+    Preencha o template HTML fornecido na [ESTRUTURA DE SAÍDA EM HTML].
+    Analise os dados da empresa e os dados de mercado para criar insights valiosos.
+    Preencha CADA seção marcada com ``.
+    Mantenha a estrutura e o CSS inline fornecidos para garantir a compatibilidade.
+    Use tags HTML padrão como <p>, <ul>, <li>, <strong> para formatar seu texto dentro de cada seção.
 
-Combine as duas análises para criar recomendações estratégicas. Por exemplo, se um vídeo tem alta performance e sentimento positivo, sugira temas similares. Se um vídeo tem alta performance mas sentimento negativo, analise o porquê e sugira como a empresa pode abordar o tema de forma melhor.
+    [DADOS DA EMPRESA]
+    {info_empresa_texto}
 
-Responda seguindo rigorosamente a [ESTRUTURA DO RELATÓRIO DE SAÍDA].
+    [TENDÊNCIAS DE PERFORMANCE (VÍDEOS EM ALTA)]
+    {info_performance_texto}
 
-[DADOS DA EMPRESA]
-{info_empresa_texto}
+    [ANÁLISE DE SENTIMENTO DA AUDIÊNCIA (VÍDEOS MAIS COMENTADOS)]
+    {info_sentimento_texto}
 
-[TENDÊNCIAS DE PERFORMANCE (VÍDEOS EM ALTA)]
-{info_performance_texto}
-
-[ANÁLISE DE SENTIMENTO DA AUDIÊNCIA (VÍDEOS MAIS COMENTADOS)]
-{info_sentimento_texto}
-
-[ESTRUTURA DO RELATÓRIO DE SAÍDA - PREENCHA OBRIGATORIAMENTE]
-
-Assunto: Relatório Estratégico de Vídeo - {nome_empresa_para_relatorio} - {data_hoje}
-
-Prezado(a) Cliente,
-Segue seu relatório com recomendações estratégicas de conteúdo, baseado em uma análise aprofundada de performance e sentimento do público.
-
-### 1. Reflexão Estratégica sobre Tendências e Sentimento
-[Preencha com uma análise que combine os dois contextos. Ex: "Observamos que vídeos sobre [Tópico de Alta Performance] geram muitas visualizações, e a análise de sentimento confirma que o público reage positivamente a [Aspecto específico dos comentários positivos]. Isso indica uma forte demanda por conteúdo que seja [Característica do conteúdo]."]
-
-### 2. Sugestão de Formato de Vídeo
-[Preencha com uma sugestão de formato, agora justificada por ambas as análises.]
-
-### 3. Sugestão de Assuntos a Serem Abordados
-[Preencha com 3-5 sugestões de temas. REGRA: Justifique brevemente cada tema com base nos dados. Ex: "Tema 1: [Sugestão] - Este tema aproveita a alta taxa de engajamento vista em [Vídeo similar] e o sentimento positivo em torno de [Tópico relacionado]."]
-
-### 4. Sugestão de Títulos e Palavras-Chave
-[Preencha com 3-5 sugestões de títulos e palavras-chave.]
-
-### 5. Sugestão de Tags
-[Preencha com até 20 tags, em linha única, separadas por vírgula e sem '#'.]
-
-### 6. Sugestão de Tempo de Vídeo
-[Preencha com uma recomendação concreta e um intervalo de tempo, justificado.]
-
-Atenciosamente,
-Sua Equipe de Análise de Tendências
+    [ESTRUTURA DE SAÍDA EM HTML - PREENCHA OBRIGATORIAMENTE]
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Relatório de Vídeo - {nome_empresa_para_relatorio}</title>
+    </head>
+    <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center" style="padding: 20px 0;">
+            <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+              <tr>
+                <td align="center" style="padding: 40px 20px; background-color: #4A90E2; color: #ffffff; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                  <h1 style="margin: 0; font-size: 24px;">Relatório Estratégico de Vídeo</h1>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 30px;">
+                  <p style="font-size: 16px; color: #333333;">Prezado(a) Cliente ({nome_empresa_para_relatorio}),</p>
+                  <p style="font-size: 16px; color: #555555; line-height: 1.5;">Segue seu relatório com recomendações estratégicas de conteúdo para {data_hoje}, baseado em uma análise aprofundada de performance e sentimento do público.</p>
+                  
+                  <h2 style="font-size: 20px; color: #4A90E2; border-bottom: 2px solid #f4f4f4; padding-bottom: 10px; margin-top: 30px;">1. Reflexão Estratégica</h2>
+                  <h2 style="font-size: 20px; color: #4A90E2; border-bottom: 2px solid #f4f4f4; padding-bottom: 10px; margin-top: 30px;">2. Sugestão de Formato de Vídeo</h2>
+                  <h2 style="font-size: 20px; color: #4A90E2; border-bottom: 2px solid #f4f4f4; padding-bottom: 10px; margin-top: 30px;">3. Sugestões de Assuntos</h2>
+                  <h2 style="font-size: 20px; color: #4A90E2; border-bottom: 2px solid #f4f4f4; padding-bottom: 10px; margin-top: 30px;">4. Sugestões de Títulos e Palavras-Chave</h2>
+                  <h2 style="font-size: 20px; color: #4A90E2; border-bottom: 2px solid #f4f4f4; padding-bottom: 10px; margin-top: 30px;">5. Sugestão de Tags</h2>
+                  <h2 style="font-size: 20px; color: #4A90E2; border-bottom: 2px solid #f4f4f4; padding-bottom: 10px; margin-top: 30px;">6. Sugestão de Tempo de Vídeo</h2>
+                  </td>
+              </tr>
+              <tr>
+                <td align="center" style="padding: 20px; background-color: #f4f4f4; color: #888888; font-size: 12px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+                  <p style="margin: 0;">Relatório gerado por AI Agent &copy; 2025</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
 """
     
     # --- C. Geração do relatório ---
     try:
         print("   - Gerando relatório com a IA...")
         response = model.generate_content(prompt_final, generation_config=generation_config)
-        texto_gerado = response.text
+        texto_gerado_html = response.text
         geracao_sucesso = True
         print("   - ✅ Relatório gerado.")
 
     except Exception as e:
         print(f"   - ❌ Erro ao gerar o relatório: {e}")
-        texto_gerado = f"ERRO: A geração do relatório falhou. Detalhes: {str(e)}"
+        texto_gerado_html = f"ERRO: A geração do relatório falhou. Detalhes: {str(e)}"
         geracao_sucesso = False
         
     # --- D. Salvamento do resultado ---
     try:
-        print(f"   - Salvando resultado na tabela: {nome_tabela_relatorios}...")
-        id_empresa_alvo_int = int(id_empresa_alvo)
-        
-        RelatorioRow = Row("id_da_empresa", "nome_da_empresa", "texto_relatorio", "versao_prompt")
-        df_para_salvar = spark.createDataFrame([
-            RelatorioRow(id_empresa_alvo_int, nome_empresa_para_relatorio, texto_gerado, versao_atual_prompt)
-        ]).withColumn("data_geracao", current_timestamp())
-        
-        df_para_salvar.write.mode("append").format("delta").saveAsTable(nome_tabela_relatorios)
-        print("   - ✅ Relatório salvo com sucesso!")
+        if geracao_sucesso:
+          print(f"   - Salvando resultado na tabela: {nome_tabela_relatorios}...")
+          id_empresa_alvo_int = int(id_empresa_alvo)
+          
+          RelatorioRow = Row("id_da_empresa", "nome_da_empresa", "texto_relatorio", "versao_prompt")
+          df_para_salvar = spark.createDataFrame([
+              RelatorioRow(id_empresa_alvo_int, nome_empresa_para_relatorio, texto_gerado_html, versao_atual_prompt)
+          ]).withColumn("data_geracao", current_timestamp())
+          
+          df_para_salvar.write.mode("append").format("delta").saveAsTable(nome_tabela_relatorios)
+          print("   - ✅ Relatório salvo com sucesso!")
     except Exception as e:
         print(f"   - ❌ Erro ao salvar o relatório no Lakehouse: {e}")
     
@@ -310,7 +325,7 @@ Sua Equipe de Análise de Tendências
         print(f"   - Enviando relatório por e-mail para: {email_do_cliente}...")
         try:
             # Converte o relatório para HTML
-            relatorio_html = markdown.markdown(texto_gerado)
+            relatorio_html = markdown.markdown(texto_gerado_html)
             payload = {
                 "email_destinatario": email_do_cliente,
                 "nome_empresa": nome_empresa_para_relatorio,
@@ -335,8 +350,29 @@ Sua Equipe de Análise de Tendências
             
     elif not email_do_cliente:
         print("   - ⚠️ E-mail não enviado: Cliente sem e-mail de contato na tabela.")
+    
+    # --- F. Exibição do Resultado no Notebook ---
+    print("\n--- Visualização do Relatório HTML Gerado ---")
+    # Usamos a função HTML para renderizar o resultado diretamente no notebook
+    display(HTML(texto_gerado_html))
+
+    print("\n   - Aguardando 15 segundos para evitar o limite de quota...")
+    time.sleep(15)
+
+
+
 
 print("\n--- PROCESSAMENTO EM LOTE CONCLUÍDO ---")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 
 # METADATA ********************
 

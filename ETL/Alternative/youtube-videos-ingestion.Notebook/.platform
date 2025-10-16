@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Notebook",
-    "displayName": "Youtube Categories Bronze",
+    "displayName": "youtube-videos-ingestion",
     "description": "New notebook"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "4f02e6dc-be5d-ad7f-4ab2-078a89c6aaee"
+    "logicalId": "26058aca-561c-98d7-4467-c1c7cf6755a0"
   }
 }

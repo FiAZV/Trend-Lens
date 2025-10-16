@@ -1,0 +1,26 @@
+table 'sample report'
+	lineageTag: 46f2d258-3774-47d8-a81c-7ddb033a77fc
+
+	column texto
+		dataType: string
+		lineageTag: 64452a24-940b-48b1-aa80-a618fce13940
+		summarizeBy: none
+		sourceColumn: texto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'sample report' = m
+		mode: import
+		source =
+				let
+				    Source = GoogleSheets.Contents("https://docs.google.com/spreadsheets/d/1RFozSWgnt88QcrOwuxa8nx1MsvJ2PWkxFlY9OYajqZQ/edit?usp=sharing"),
+				    Página2_Table = Source{[name="Página2",ItemKind="Table"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Página2_Table, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"texto", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

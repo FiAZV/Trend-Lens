@@ -64,6 +64,7 @@ relationship 8a40cb5e-f882-d871-8ba3-8c6dabadd126
 	toColumn: dim_channel.channel_id
 
 relationship 4998611e-499c-2abf-db42-54b32c722cf6
+	crossFilteringBehavior: bothDirections
 	fromColumn: fact_video_engagement.category_id
 	toColumn: dim_category.category_id
 
@@ -72,14 +73,17 @@ relationship 261863fe-945d-4ce6-31ab-343c6b7225ee
 	toColumn: dim_channel.channel_id
 
 relationship 8c86f3e5-c16f-2959-ae91-b3aee9dfc9e6
+	crossFilteringBehavior: bothDirections
 	fromColumn: bridge_video_tag.video_id
 	toColumn: dim_video.video_id
 
 relationship 755773f8-36ff-0e20-1965-63d206424c44
+	crossFilteringBehavior: bothDirections
 	fromColumn: bridge_video_tag.tag_id
 	toColumn: dim_tag.tag_id
 
 relationship 62ada332-d7c2-9fa5-5fe6-aa348568705a
+	crossFilteringBehavior: bothDirections
 	fromColumn: dim_comment.video_id
 	toColumn: fact_video_engagement.video_id
 
@@ -88,4 +92,9 @@ relationship ec900f7e-fa01-9f87-085b-1e583be88e49
 	fromCardinality: one
 	fromColumn: dim_comments_sentiment.comment_id
 	toColumn: dim_comment.comment_id
+
+relationship b4b4dcea-12ae-4a18-8e8b-e6592c5e51d5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_reports.data_geracao
+	toColumn: LocalDateTable_a70579b8-70f9-4da1-8688-643054d236ca.Date
 

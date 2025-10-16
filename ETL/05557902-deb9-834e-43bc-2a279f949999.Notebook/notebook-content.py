@@ -411,7 +411,7 @@ def extract_popular_videos():
         'maxResults': 50
     }
 
-    category_ids = get_video_category_ids()
+    category_ids = [1, 2, 10, 15, 17, 20, 22, 23, 24, 25, 26, 27, 28]
 
     all_dfs = []
 
@@ -491,9 +491,10 @@ def get_channel_ids(videos_df: DataFrame, spark: SparkSession) -> list:
     
     # Tentar ler canais já salvos
     try:
-        existing_channels_df = spark.read.json("Files/landing/youtube/channels")
+        existing_channels_df = spark.read.format("delta").load("Tables/silver/youtube_channels")
+        display(existing_channels_df)
         existing_channel_ids = existing_channels_df \
-            .select(col("id").alias("channelId")) \
+            .select(col("channel_id").alias("channelId")) \
             .distinct() \
             .rdd.map(lambda row: row.channelId) \
             .collect()
